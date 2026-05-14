@@ -1,0 +1,9 @@
+{
+  "Name": "Cacimar",
+  "Level": 1,
+  "Hp": 10,
+  "Defense": 5,
+  "Accuracy": 0,
+  "DamageDie": "D4",
+  "Xp": 0
+}
