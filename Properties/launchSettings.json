@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "AdventureTest": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "GOOGLE_API_KEY": "AIzaSyAZvb8hnn_0Xs2a8PGFec2T88Z_B0rYNEI"
+      }
+    }
+  }
+}

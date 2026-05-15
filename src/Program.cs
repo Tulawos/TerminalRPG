@@ -7,8 +7,8 @@ namespace AdventureTest.src
     {
         static void Main()
         {
-            GeminiAPI ai = new GeminiAPI();
             
+            GeminiAPI.main().Wait();
         }
     }
 }
