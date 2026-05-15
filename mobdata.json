@@ -1,9 +1,9 @@
 {
   "Name": "Orc",
   "Level": 1,
-  "Hp": 8,
+  "Hp": 5,
   "Defense": 2,
-  "Accuracy": 8,
+  "Accuracy": 2,
   "DamageDie": 6,
   "XpValue": 10
 }
