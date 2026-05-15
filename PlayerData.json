@@ -2,8 +2,8 @@
   "Name": "Cacimar",
   "Level": 1,
   "Hp": 10,
-  "Defense": 5,
-  "Accuracy": 0,
-  "DamageDie": "D4",
+  "Defense": 3,
+  "Accuracy": 10,
+  "DamageDie": 6,
   "Xp": 0
 }

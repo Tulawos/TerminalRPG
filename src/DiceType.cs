@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AdventureTest
+namespace AdventureTest.src
 {
     public enum DiceType
     {

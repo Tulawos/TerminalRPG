@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdventureTest
+namespace AdventureTest.src
 {
-    public class Map
+    public class Block
     {
-        public Block[][] grid;
+
     }
 }
