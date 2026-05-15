@@ -6,6 +6,7 @@ namespace AdventureTest.src
 {
     public class Player : Fighter
     {
+        
         public void AddXP(int xpEarned) => Xp += xpEarned;
     }
 }

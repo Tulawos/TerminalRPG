@@ -8,7 +8,6 @@ namespace AdventureTest.src
 {
     public class Monsters : Fighter
     {
-        
 
         public void AddDamage(int damageReceived) => Damage += damageReceived;
 
