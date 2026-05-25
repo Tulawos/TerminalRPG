@@ -12,13 +12,13 @@ namespace AdventureTest.src
             return JsonSerializer.Deserialize<T>(playerJson, options);
         }
 
-        public void Save(Player player)
+        public void Save(T player)
         {
             var options = new JsonSerializerOptions();
 
             options.WriteIndented = true;
 
-            string jsonString = JsonSerializer.Serialize<Player>(player, options);
+            string jsonString = JsonSerializer.Serialize<T>(player, options);
             File.WriteAllText("C:\\Users\\aleja\\Desktop\\C# Projects\\AdventureTest\\PlayerData.json", jsonString);
         }
     }

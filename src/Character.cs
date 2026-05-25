@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdventureTest.src
 {
-    public abstract class Fighter
+    public abstract class Character
     {
         public string Name { get; set; } = "";
         public int Level { get; set; }
@@ -16,7 +16,8 @@ namespace AdventureTest.src
         public DiceType DamageDie { get; set; }
         public int Xp { get; set; }
         public int Damage { get; set; } = 0;
-
+        public int Initiative = 0;
+        
         public DiceType SetDamageDie(int damageDie)
         {
             if (damageDie == 0)
@@ -36,5 +37,8 @@ namespace AdventureTest.src
             else
                 throw new ArgumentException("Invalid damage die type");
         }
+
+        public void SetInitiative() => Initiative = Dice.Roll(DiceType.D20) + Accuracy;
+        
     }
 }

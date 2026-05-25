@@ -1,67 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AdventureTest.src
+﻿namespace AdventureTest.src
 {
-    internal class CombatEngine
+    public class CombatEngine
     {
-        Fighter[] turnOrder;
+        Player player;
+        List<Monsters> monsters;
 
-        public void Battle(Player player, Monsters monsters)
+        public CombatEngine(Player player, List<Monsters> monsters)
         {
-            TurnOrder(player, monsters);
+            this.player = player;
+            this.monsters = monsters;
+        }
 
-            while (player.Hp > 0 && monsters.Hp > 0)
+        public void Combat()
+        {
+            int roundCount = 0;
+
+            while (player.Hp > 0 && monsters.Count() > 0 && roundCount < 10)
             {
-                BattleRound(player, monsters);
+                Queue<Character> turnOrder = SetTurnOrder();
+                roundCount++;
+
+                BattleRound round = new BattleRound(player, monsters, turnOrder);
+                round.Round();
             }
         }
 
-        private void TurnOrder(Player player, Monsters monsters)
+        private Queue<Character> SetTurnOrder()
         {
-            Fighter[] tmpOrder = new Fighter[2];
-            int playerInitiative = Dice.Roll(DiceType.D20) + player.Accuracy;
-            int monsterInitiative = Dice.Roll(DiceType.D20) + monsters.Accuracy;
 
-            if(playerInitiative >= monsterInitiative)
+            var characters = SetInitiatives();
+
+            Queue<Character> turnOrder = new Queue<Character>();
+            foreach(var character in characters)
             {
-                tmpOrder[0] = player;
-                tmpOrder[1] = monsters;
+                turnOrder.Enqueue(character);
             }
-            else
-            {
-                tmpOrder[0] = monsters;
-                tmpOrder[1] = player;
-            }
-            turnOrder = tmpOrder;
+
+            return turnOrder;
         }
 
-        private void BattleRound(Player player, Monsters monsters)
+        private List<Character> SetInitiatives()
         {
-            for (int i = 0; i < turnOrder.Length; i++)
-            {
-                if (turnOrder[i] is Player)
-                {
-                    Attack(player, monsters);
-                }
-                else
-                {
-                    Attack(turnOrder[i], player);
-                }
-            }
-        }
+            List<Character> characterLists = new List<Character>();
 
-        private void Attack(Fighter attacker , Fighter defender)
-        {
-            int attackRoll = Dice.Roll(DiceType.D20) + attacker.Accuracy;
+            player.SetInitiative();
+            characterLists.Add(player);
 
-            if (attackRoll >= defender.Defense)
+            foreach (var monster in monsters)
             {
-                
+                monster.SetInitiative();
+                characterLists.Add(monster);
             }
+
+            var sortedList = characterLists.OrderByDescending(c => c.Initiative).ToList();
+
+            return sortedList;
         }
     }
 }
+
+    

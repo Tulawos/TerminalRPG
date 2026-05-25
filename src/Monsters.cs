@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdventureTest.src
 {
-    public class Monsters : Fighter
+    public class Monsters : Character
     {
 
         public void AddDamage(int damageReceived) => Damage += damageReceived;
