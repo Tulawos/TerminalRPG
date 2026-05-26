@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Numerics;
+using AdventureTest.src.FileHandler;
 
 namespace AdventureTest.src
 {
@@ -7,19 +8,13 @@ namespace AdventureTest.src
     {
         static void Main()
         {
-            FileHandler<Player> playerFile = new FileHandler<Player>();
-            FileHandler<Monsters> monsterFile = new FileHandler<Monsters>();
-
-            Player player = playerFile.Load("C:\\Users\\aleja\\Desktop\\C# Projects\\AdventureTest\\playerdata.json");
-            Monsters monster = monsterFile.Load("C:\\Users\\aleja\\Desktop\\C# Projects\\AdventureTest\\monsterdata.json");
-
-            List<Monsters> monsters = new List<Monsters>();
-            monsters.Add(monster);
-
-            Console.WriteLine("Player Name: " + player.Name + "Player HP: " + player.Hp);
-
-            CombatEngine combat = new CombatEngine(player, monsters);
+            LoadGame loadGame = new LoadGame();
+            var player = loadGame.LoadPlayer("data\\player\\playerdata.json");
+            CombatEngine combat = new CombatEngine(player, loadGame.LoadMonsters("data\\monsters\\monsterdata.json"));
             combat.Combat();
+
+            FileHandler<Player> fileHandler = new FileHandler<Player>();
+            fileHandler.Save(player);
         }
     }
 }
