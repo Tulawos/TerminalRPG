@@ -1,4 +1,4 @@
-﻿namespace AdventureTest.src
+﻿namespace AdventureTest.src.CombatEng
 {
     public class CombatEngine
     {
@@ -13,15 +13,15 @@
 
         public void Combat()
         {
-            int roundCount = 0;
+            int round = 0;
 
-            while (player.Hp > 0 && monsters.Count() > 0 && roundCount < 10)
+            while (player.Hp > 0 && monsters.Count() > 0 && round < 10)
             {
                 Queue<Character> turnOrder = SetTurnOrder();
-                roundCount++;
+                round++;
 
-                BattleRound round = new BattleRound(player, monsters, turnOrder);
-                round.Round();
+                BattleRound battleRound = new BattleRound(player, monsters, turnOrder);
+                battleRound.Round();
             }
         }
 
@@ -58,5 +58,3 @@
         }
     }
 }
-
-    

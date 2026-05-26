@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdventureTest.src
+namespace AdventureTest.src.CombatEng
 {
     public class BattleRound
     {
@@ -26,7 +26,11 @@ namespace AdventureTest.src
             while (combatants.Count > 0)
             {
                 var combatant = combatants.Dequeue();
-                Console.WriteLine(combatant.Name + " takes their turn!");
+
+                if (combatant is Player)
+                    Attack(combatant, monsters);
+                else
+                    Attack(combatant, player);
             }
         }
 
