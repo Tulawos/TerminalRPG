@@ -1,4 +1,6 @@
 {
+  "ID": 0,
+  "Initiative": 0,
   "Name": "Hero",
   "Level": 1,
   "MaxHp": 30,

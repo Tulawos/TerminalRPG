@@ -10,14 +10,14 @@ namespace AdventureTest.src.Moves
 {
     public class Move : IMove
     {
-        public string Name { get; set; }
-        public Elements.ElementType Element { get; set; }
+        public string Name { get; set; } = "";
+        public ElementType Element { get; set; }
         public int Damage { get; set; }
         public int CriticalChance { get; set; }
 
         public void Execute()
         {
-            throw new NotImplementedException();
+            //TODO
         }
     }
 }

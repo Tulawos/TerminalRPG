@@ -14,9 +14,9 @@ namespace AdventureTest.src
                 target.TakeDamage(damage);
             }
         }
-        public void ChooseAction(List<MOB> monsters)
+        public void ChooseAction()
         {
-
+            
 
 
 

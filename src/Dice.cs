@@ -4,7 +4,7 @@ namespace AdventureTest.src
 {
     public class Dice
     {
-        private static readonly Random _random = new Random();
+        private static readonly Random _random = new();
         public static int Roll(DiceType die)
         {
             if (die == DiceType.D0)

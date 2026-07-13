@@ -10,7 +10,7 @@ namespace AdventureTest.src.CombatEng
     {
         public void Turn(Player player, List<MOB> monsters)
         {
-            player.ChooseAction(monsters);
+            player.ChooseAction();
         }
 
         public void Turn(MOB monster, Player player, List<MOB> monsters)

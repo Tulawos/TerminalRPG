@@ -1,13 +1,11 @@
-﻿using AdventureTest.src;
-
-namespace AdventureTest
+﻿namespace AdventureTest.src
 {
     public interface ICombatant
     {
+        public int Initiative { get; }
         public int RollInitiative();
         public void TakeDamage(int damageReceived);
         public int GetCurrentHP();
         public void ResetDamage();
-        //public void Fight(MOB target);
     }
 }

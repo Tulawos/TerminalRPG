@@ -11,8 +11,8 @@ namespace AdventureTest.src
     {
         static void Main()
         {            
-            LoadGame loadGame = new LoadGame();
-            SaveGame saveGame = new SaveGame();
+            LoadGame loadGame = new();
+            SaveGame saveGame = new();
 
             var player = loadGame.LoadPlayer(
                 "C:\\Users\\aleja\\Desktop\\Software Projects\\AdventureTest\\Files\\player.json");
@@ -21,8 +21,8 @@ namespace AdventureTest.src
             var moves = loadGame.LoadMoves(
                 "C:\\Users\\aleja\\Desktop\\Software Projects\\AdventureTest\\Files\\moves.json");
 
-            MovesList movesList = new MovesList(moves);
-            BattleGenerator combat = new BattleGenerator(player, monsters);
+            MovesList movesList = new(moves);
+            BattleGenerator combat = new(player, monsters);
             combat.GenerateBattle(player);
             saveGame.Save(player);
         }

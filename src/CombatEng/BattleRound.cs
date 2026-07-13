@@ -11,7 +11,6 @@ namespace AdventureTest.src.CombatEng
         Player player;
         List<MOB> monsters;
         Queue<ICombatant> combatants;
-        public int RoundNumber { get; set; }
 
         public BattleRound(Player player, List<MOB> monsters, Queue<ICombatant> combatants)
         {
@@ -22,8 +21,8 @@ namespace AdventureTest.src.CombatEng
 
         public void Round()
         {
-            CombatantTurn turn = new CombatantTurn();
-            while (combatants.Count() != 0)
+            CombatantTurn turn = new();
+            while (combatants.Count != 0)
             {
                 var combatant = combatants.Dequeue();
                 if (combatant is Player)
@@ -32,11 +31,9 @@ namespace AdventureTest.src.CombatEng
                 }
                 else
                 {
-                    
                     MOB monster = (MOB)combatant;
                     turn.Turn(monster, player, monsters);
                 }
-                RoundNumber++;
             }
         }
     }

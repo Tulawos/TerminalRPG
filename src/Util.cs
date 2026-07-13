@@ -4,9 +4,9 @@ namespace AdventureTest.src
 {
     public class Util
     {
-        public Dictionary<string, Move> ConvertListToMap(List<Move> moves)
+        public static Dictionary<string, Move> ConvertListToMap(List<Move> moves)
         {
-            Dictionary<string, Move> moveMap = new Dictionary<string, Move>();
+            Dictionary<string, Move> moveMap = [];
             foreach (var move in moves)
             {
                 moveMap[move.Name] = move;
@@ -14,9 +14,9 @@ namespace AdventureTest.src
             return moveMap;
         }
 
-        public Dictionary<int, MOB> ConvertListToMap(List<MOB> mobs)
+        public static Dictionary<int, MOB> ConvertListToMap(List<MOB> mobs)
         {
-            Dictionary<int, MOB> mobMap = new Dictionary<int, MOB>();
+            Dictionary<int, MOB> mobMap = [];
             foreach (var mob in mobs)
             {
                 mobMap[mob.ID] = mob;

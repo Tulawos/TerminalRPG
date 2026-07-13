@@ -2,8 +2,8 @@
 {
     public class Battle
     {
-        Player player;
-        List<MOB> monsters;
+        readonly Player player;
+        readonly List<MOB> monsters;
 
         public Battle(Player player, List<MOB> monsters)
         {
@@ -15,19 +15,19 @@
         {
             int round = 0;
 
-            while (player.MaxHp > 0 && monsters.Count() > 0 && round < 10)
+            while (player.MaxHp > 0 && monsters.Count > 0 && round < 10)
             {
                 Queue<ICombatant> turnOrder = SetTurnOrder();
                 round++;
 
-                BattleRound battleRound = new BattleRound(player, monsters, turnOrder);
+                BattleRound battleRound = new(player, monsters, turnOrder);
                 battleRound.Round();
             }
         }
 
         private Queue<ICombatant> SetTurnOrder()
         {
-            Queue<ICombatant> turnOrder = new Queue<ICombatant>();
+            Queue<ICombatant> turnOrder = new();
             var characters = SetInitiatives();
             
             foreach(var character in characters) turnOrder.Enqueue(character);
@@ -37,7 +37,7 @@
 
         private List<ICombatant> SetInitiatives()
         {
-            List<ICombatant> characterLists = new List<ICombatant>();
+            List<ICombatant> characterLists = [];
 
             player.RollInitiative();
             characterLists.Add(player);
@@ -48,9 +48,10 @@
                 characterLists.Add(monster);
             }
 
-            var sortedList = characterLists.OrderByDescending(c => c.RollInitiative()).ToList();
+            var sortedList = characterLists.OrderByDescending(c => c.Initiative).ToList();
 
             return sortedList;
         }
+        
     }
 }

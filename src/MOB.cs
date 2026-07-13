@@ -7,12 +7,11 @@ namespace AdventureTest.src
     public class MOB : Attributes, ICombatant
     {
         public int ID { get; private set; }
+        public int Initiative { get; private set; }
         public void TakeDamage(int damageReceived) => Damage += damageReceived;
         public void ResetDamage() => Damage = 0;
         public int GetCurrentHP() => MaxHp - Damage;
-        public int RollInitiative() => Dice.Roll(DiceType.D20) + Accuracy;
-
-       
+        public int RollInitiative() => Dice.Roll(DiceType.D20) + Accuracy;       
 
         public void ChooseAction(MOB target)
         {
@@ -21,7 +20,7 @@ namespace AdventureTest.src
         }
         public virtual void Fight(MOB target)
         {
-            ChooseMove(target);
+            ChooseMove();
             int attackRoll = Dice.Roll(DiceType.D20) + Accuracy;
             if (attackRoll >= target.Defense)
             {
@@ -30,7 +29,7 @@ namespace AdventureTest.src
             }
         }
 
-        private void ChooseMove(MOB target)
+        private void ChooseMove()
         {
             
         }

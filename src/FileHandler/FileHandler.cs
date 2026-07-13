@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace AdventureTest.src.FileHandler
 {
@@ -13,7 +14,10 @@ namespace AdventureTest.src.FileHandler
             {
                 var jsonFile = File.ReadAllText(fileName);
                 var options = new JsonSerializerOptions();
+
                 options.PropertyNameCaseInsensitive = true;
+                options.Converters.Add(new JsonStringEnumConverter());
+
                 var result = JsonSerializer.Deserialize<T>(jsonFile, options);
 
                 if (result == null) throw new JsonException($"File '{fileName}' deserialized to null.");

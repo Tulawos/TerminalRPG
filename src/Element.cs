@@ -6,19 +6,16 @@ using System.Threading.Tasks;
 
 namespace AdventureTest.src
 {
-    public class Elements
+    public enum ElementType
     {
-        public enum ElementType
-        {
-            Fire,
-            Water,
-            Earth,
-            Air,
-            Lightning,
-            Ice,
-            Light,
-            Dark,
-            Normal
-        }
+        Fire,
+        Water,
+        Earth,
+        Air,
+        Electric,
+        Ice,
+        Light,
+        Dark,
+        Normal
     }
 }
