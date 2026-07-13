@@ -6,19 +6,14 @@ using System.Threading.Tasks;
 
 namespace AdventureTest.src.CombatEng
 {
-    internal class Turn
+    internal class CombatantTurn
     {
-        public void Attack(Player player, List<Monsters> monsters)
+        public void Turn(Player player, List<MOB> monsters)
         {
-            int attackRoll = Dice.Roll(DiceType.D20) + player.Accuracy;
-
-            if (attackRoll >= monsters[0].Defense)
-            {
-
-            }
+            player.ChooseAction(monsters);
         }
 
-        public void Attack(Monsters monster, Player player, List<Monsters> monsters)
+        public void Turn(MOB monster, Player player, List<MOB> monsters)
         {
             int attackRoll = Dice.Roll(DiceType.D20) + monster.Accuracy;
 

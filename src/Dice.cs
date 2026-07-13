@@ -28,3 +28,4 @@ namespace AdventureTest.src
         D20 = 20
     }
 }
+

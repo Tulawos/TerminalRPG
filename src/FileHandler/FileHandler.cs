@@ -33,16 +33,5 @@ namespace AdventureTest.src.FileHandler
                 throw new Exception($"Failed to load and deserialize file: {fileName}", ex);
             }
         }
-
-        public void Save(Player player)
-        {
-            var options = new JsonSerializerOptions();
-
-            options.WriteIndented = true;
-
-            string jsonString = JsonSerializer.Serialize<Player>(player, options);
-            File.WriteAllText(
-                "C:\\Users\\aleja\\Desktop\\Software Projects\\AdventureTest\\Files\\player.json", jsonString);
-        }
     }
 }

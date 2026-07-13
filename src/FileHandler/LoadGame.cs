@@ -9,11 +9,11 @@ namespace AdventureTest.src.FileHandler
             return playerFile.Load(fileName);
         }
 
-        public List<Monsters> LoadMonsters(string fileName)
+        public List<MOB> LoadMonsters(string fileName)
         {
-            List<Monsters> monsters = new List<Monsters>();
+            List<MOB> monsters = new List<MOB>();
 
-            FileHandler<List<Monsters>> monsterFile = new FileHandler<List<Monsters>>();
+            FileHandler<List<MOB>> monsterFile = new FileHandler<List<MOB>>();
             return monsterFile.Load(fileName);
         }  
     }

@@ -1,0 +1,10 @@
+{
+  "Name": "Hero",
+  "Level": 1,
+  "MaxHp": 30,
+  "Damage": 0,
+  "Defense": 12,
+  "Accuracy": 4,
+  "DamageDie": 8,
+  "Xp": 0
+}

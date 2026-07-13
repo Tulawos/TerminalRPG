@@ -1,17 +1,17 @@
 ﻿namespace AdventureTest.src.CombatEng
 {
-    public class CombatEngine
+    public class Battle
     {
         Player player;
-        List<Monsters> monsters;
+        List<MOB> monsters;
 
-        public CombatEngine(Player player, List<Monsters> monsters)
+        public Battle(Player player, List<MOB> monsters)
         {
             this.player = player;
             this.monsters = monsters;
         }
 
-        public void Battle()//remove round
+        public void BattleStart()//remove round
         {
             int round = 0;
 
