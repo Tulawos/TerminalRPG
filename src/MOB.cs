@@ -6,6 +6,7 @@ namespace AdventureTest.src
 {
     public class MOB : Attributes, ICombatant
     {
+        public int ID { get; private set; }
         public void TakeDamage(int damageReceived) => Damage += damageReceived;
         public void ResetDamage() => Damage = 0;
         public int GetCurrentHP() => MaxHp - Damage;

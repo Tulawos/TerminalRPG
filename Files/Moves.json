@@ -1,0 +1,44 @@
+[
+  {
+    "Name": "Slash",
+    "Element": "Normal",
+    "Damage": 8,
+    "CriticalChance": 10
+  },
+  {
+    "Name": "Fireball",
+    "Element": "Fire",
+    "Damage": 15,
+    "CriticalChance": 5
+  },
+  {
+    "Name": "Holy Smite",
+    "Element": "Light",
+    "Damage": 12,
+    "CriticalChance": 20
+  },
+  {
+    "Name": "Lightning Bolt",
+    "Element": "Electric",
+    "Damage": 18,
+    "CriticalChance": 5
+  },
+  {
+    "Name": "Shadow Stab",
+    "Element": "Dark",
+    "Damage": 10,
+    "CriticalChance": 35
+  },
+  {
+    "Name": "Ice Shard",
+    "Element": "Ice",
+    "Damage": 11,
+    "CriticalChance": 15
+  },
+  {
+    "Name": "Earthquake",
+    "Element": "Earth",
+    "Damage": 22,
+    "CriticalChance": 2
+  }
+]

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AdventureTest.src.Moves
 {
-    internal class Move : IMove
+    public class Move : IMove
     {
         public string Name { get; set; }
         public Elements.ElementType Element { get; set; }

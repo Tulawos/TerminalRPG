@@ -7,7 +7,8 @@
     "Defense": 10,
     "Accuracy": 2,
     "DamageDie": 4,
-    "Xp": 15
+    "Xp": 15,
+    "ID": 0
   },
   {
     "Name": "Orc Warrior",
@@ -17,6 +18,7 @@
     "Defense": 14,
     "Accuracy": 5,
     "DamageDie": 8,
-    "Xp": 50
+    "Xp": 50,
+    "ID": 1
   }
 ]
