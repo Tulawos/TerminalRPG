@@ -11,11 +11,11 @@
             this.monsters = monsters;
         }
 
-        public void Battle()
+        public void Battle()//remove round
         {
             int round = 0;
 
-            while (player.Hp > 0 && monsters.Count() > 0 && round < 10)
+            while (player.MaxHp > 0 && monsters.Count() > 0 && round < 10)
             {
                 Queue<ICombatant> turnOrder = SetTurnOrder();
                 round++;
@@ -27,32 +27,28 @@
 
         private Queue<ICombatant> SetTurnOrder()
         {
-
-            var characters = SetInitiatives();
-
             Queue<ICombatant> turnOrder = new Queue<ICombatant>();
-            foreach(var character in characters)
-            {
-                turnOrder.Enqueue(character);
-            }
+            var characters = SetInitiatives();
+            
+            foreach(var character in characters) turnOrder.Enqueue(character);
 
             return turnOrder;
         }
 
-        private List<AdventureTest.ICombatant> SetInitiatives()
+        private List<ICombatant> SetInitiatives()
         {
-            List<AdventureTest.ICombatant> characterLists = new List<AdventureTest.ICombatant>();
+            List<ICombatant> characterLists = new List<ICombatant>();
 
-            player.SetInitiative();
+            player.RollInitiative();
             characterLists.Add(player);
 
             foreach (var monster in monsters)
             {
-                monster.SetInitiative();
+                monster.RollInitiative();
                 characterLists.Add(monster);
             }
 
-            var sortedList = characterLists.OrderByDescending(c => c.Initiative).ToList();
+            var sortedList = characterLists.OrderByDescending(c => c.RollInitiative()).ToList();
 
             return sortedList;
         }

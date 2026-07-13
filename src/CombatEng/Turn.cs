@@ -8,30 +8,21 @@ namespace AdventureTest.src.CombatEng
 {
     internal class Turn
     {
-        private ICombatant attacker;
-        private ICombatant? defender;
-        private List<Monsters> monsters = new List<Monsters>();
-
-        
-
-        public Turn(ICombatant attacker, List<Monsters> monsters)
+        public void Attack(Player player, List<Monsters> monsters)
         {
-            this.attacker = attacker;
-            this.monsters = monsters;
+            int attackRoll = Dice.Roll(DiceType.D20) + player.Accuracy;
+
+            if (attackRoll >= monsters[0].Defense)
+            {
+
+            }
         }
 
-        public Turn(ICombatant attacker, ICombatant defender, List<Monsters> monsters)
+        public void Attack(Monsters monster, Player player, List<Monsters> monsters)
         {
-            this.attacker = attacker;
-            this.defender = defender;
-            this.monsters = monsters;
-        }
+            int attackRoll = Dice.Roll(DiceType.D20) + monster.Accuracy;
 
-        private void Attack()
-        {
-            int attackRoll = Dice.Roll(DiceType.D20) + attacker.Accuracy;
-
-            if (attackRoll >= defender.Defense)
+            if (attackRoll >= player.Defense)
             {
 
             }

@@ -1,9 +1,4 @@
 ﻿using AdventureTest.src;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdventureTest
 {
@@ -11,14 +6,17 @@ namespace AdventureTest
     {
         string Name { get; set; }
         int Level { get; set; }
-        int Hp { get; set; }
+        int MaxHp { get; set; }
+        int Damage { get; set; }
         int Defense { get; set; }
         int Accuracy { get; set; }
         public DiceType DamageDie { get; set; }
         int Xp { get; set; }
-        int CurrentHealth { get; set; }
-        int Initiative { get; set; }
 
-        public void SetInitiative(); 
+        public int RollInitiative();
+        public void UpdateHealth(int damageReceived);
+        public int GetCurrentHP();
+        public void ResetDamage();
+        
     }
 }

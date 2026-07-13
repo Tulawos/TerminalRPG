@@ -1,0 +1,22 @@
+[
+  {
+    "Name": "Goblin Scout",
+    "Level": 1,
+    "MaxHp": 12,
+    "Damage": 0,
+    "Defense": 10,
+    "Accuracy": 2,
+    "DamageDie": 4,
+    "Xp": 15
+  },
+  {
+    "Name": "Orc Warrior",
+    "Level": 3,
+    "MaxHp": 25,
+    "Damage": 0,
+    "Defense": 14,
+    "Accuracy": 5,
+    "DamageDie": 8,
+    "Xp": 50
+  }
+]

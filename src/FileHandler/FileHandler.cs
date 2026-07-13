@@ -41,7 +41,8 @@ namespace AdventureTest.src.FileHandler
             options.WriteIndented = true;
 
             string jsonString = JsonSerializer.Serialize<Player>(player, options);
-            File.WriteAllText("data\\player\\playerdata.json", jsonString);
+            File.WriteAllText(
+                "C:\\Users\\aleja\\Desktop\\Software Projects\\AdventureTest\\Files\\player.json", jsonString);
         }
     }
 }

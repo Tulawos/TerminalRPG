@@ -18,23 +18,26 @@ namespace AdventureTest.src.CombatEng
             this.player = player;
             this.monsters = monsters;
             this.combatants = combatants;
-        }            
+        }
 
         public void Round()
         {
-            while (combatants.Count > 0)
+            Turn turn = new Turn();
+            while (combatants.Count() != 0)
             {
                 var combatant = combatants.Dequeue();
 
                 if (combatant is Player)
                 {
-                    Turn playerTurn = new Turn(player, monsters);
+                    turn.Attack(player, monsters);
                 }
                 else
                 {
+                    
                     Monsters monster = (Monsters)combatant;
-                    Turn playerTurn = new Turn(monster, player, monsters);
+                    turn.Attack(monster, player, monsters);
                 }
+                RoundNumber++;
             }
         }
     }

@@ -1,7 +1,8 @@
-﻿using System;
-using System.Numerics;
+﻿using AdventureTest.src.CombatEng;
 using AdventureTest.src.FileHandler;
-using AdventureTest.src.CombatEng;
+using Google.GenAI;
+using System;
+using System.Numerics;
 
 namespace AdventureTest.src
 {
@@ -10,8 +11,11 @@ namespace AdventureTest.src
         static void Main()
         {
             LoadGame loadGame = new LoadGame();
-            var player = loadGame.LoadPlayer("data\\player\\playerdata.json");
-            CombatEngine combat = new CombatEngine(player, loadGame.LoadMonsters("data\\monsters\\monsterdata.json"));
+            var player = loadGame.LoadPlayer(
+                "C:\\Users\\aleja\\Desktop\\Software Projects\\AdventureTest\\Files\\player.json");
+            var monsters = loadGame.LoadMonsters(
+                "C:\\Users\\aleja\\Desktop\\Software Projects\\AdventureTest\\Files\\monsters.json");
+            CombatEngine combat = new CombatEngine(player, monsters);
             combat.Battle();
 
             FileHandler<Player> fileHandler = new FileHandler<Player>();
