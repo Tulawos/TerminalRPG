@@ -5,14 +5,14 @@ using AdventureTest.src.CombatEng;
 
 namespace AdventureTest.src
 {
-    public class Program
+    public class Program 
     {
         static void Main()
         {
             LoadGame loadGame = new LoadGame();
             var player = loadGame.LoadPlayer("data\\player\\playerdata.json");
             CombatEngine combat = new CombatEngine(player, loadGame.LoadMonsters("data\\monsters\\monsterdata.json"));
-            combat.Combat();
+            combat.Battle();
 
             FileHandler<Player> fileHandler = new FileHandler<Player>();
             fileHandler.Save(player);

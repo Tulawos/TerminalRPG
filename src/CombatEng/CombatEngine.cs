@@ -11,13 +11,13 @@
             this.monsters = monsters;
         }
 
-        public void Combat()
+        public void Battle()
         {
             int round = 0;
 
             while (player.Hp > 0 && monsters.Count() > 0 && round < 10)
             {
-                Queue<Character> turnOrder = SetTurnOrder();
+                Queue<ICombatant> turnOrder = SetTurnOrder();
                 round++;
 
                 BattleRound battleRound = new BattleRound(player, monsters, turnOrder);
@@ -25,12 +25,12 @@
             }
         }
 
-        private Queue<Character> SetTurnOrder()
+        private Queue<ICombatant> SetTurnOrder()
         {
 
             var characters = SetInitiatives();
 
-            Queue<Character> turnOrder = new Queue<Character>();
+            Queue<ICombatant> turnOrder = new Queue<ICombatant>();
             foreach(var character in characters)
             {
                 turnOrder.Enqueue(character);
@@ -39,9 +39,9 @@
             return turnOrder;
         }
 
-        private List<Character> SetInitiatives()
+        private List<AdventureTest.ICombatant> SetInitiatives()
         {
-            List<Character> characterLists = new List<Character>();
+            List<AdventureTest.ICombatant> characterLists = new List<AdventureTest.ICombatant>();
 
             player.SetInitiative();
             characterLists.Add(player);

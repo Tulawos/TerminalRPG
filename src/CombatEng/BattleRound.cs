@@ -10,16 +10,15 @@ namespace AdventureTest.src.CombatEng
     {
         Player player;
         List<Monsters> monsters;
-        Queue<Character> combatants;
+        Queue<ICombatant> combatants;
+        public int RoundNumber { get; set; }
 
-        public BattleRound(Player player, List<Monsters> monsters, Queue<Character> combatants)
+        public BattleRound(Player player, List<Monsters> monsters, Queue<ICombatant> combatants)
         {
             this.player = player;
             this.monsters = monsters;
             this.combatants = combatants;
-        }
-
-        
+        }            
 
         public void Round()
         {
@@ -28,19 +27,14 @@ namespace AdventureTest.src.CombatEng
                 var combatant = combatants.Dequeue();
 
                 if (combatant is Player)
-                    Attack(combatant, monsters);
+                {
+                    Turn playerTurn = new Turn(player, monsters);
+                }
                 else
-                    Attack(combatant, player);
-            }
-        }
-
-        private void Attack(Character attacker, Character defender)
-        {
-            int attackRoll = Dice.Roll(DiceType.D20) + attacker.Accuracy;
-
-            if (attackRoll >= defender.Defense)
-            {
-
+                {
+                    Monsters monster = (Monsters)combatant;
+                    Turn playerTurn = new Turn(monster, player, monsters);
+                }
             }
         }
     }

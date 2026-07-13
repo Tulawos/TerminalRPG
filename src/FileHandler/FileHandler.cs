@@ -9,10 +9,29 @@ namespace AdventureTest.src.FileHandler
             if (!File.Exists(fileName))
                 throw new FileNotFoundException($"File not found: {fileName}");
 
-            var jsonFile = File.ReadAllText(fileName);
-            var options = new JsonSerializerOptions();
-            options.PropertyNameCaseInsensitive = true;
-            return JsonSerializer.Deserialize<T>(jsonFile, options);
+            try
+            {
+                var jsonFile = File.ReadAllText(fileName);
+                var options = new JsonSerializerOptions();
+                options.PropertyNameCaseInsensitive = true;
+                var result = JsonSerializer.Deserialize<T>(jsonFile, options);
+
+                if (result == null) throw new JsonException($"File '{fileName}' deserialized to null.");
+
+                return result;
+            }
+            catch (JsonException ex)
+            {
+                throw new Exception($"JSON syntax error in file '{fileName}': {ex.Message}", ex);
+            }
+            catch (IOException ex)
+            {
+                throw new Exception($"I/O error reading file '{fileName}': {ex.Message}", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Failed to load and deserialize file: {fileName}", ex);
+            }
         }
 
         public void Save(Player player)
