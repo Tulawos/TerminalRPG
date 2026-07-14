@@ -6,5 +6,19 @@
   "Defense": 12,
   "Accuracy": 4,
   "DamageDie": 8,
-  "Xp": 0
+  "Xp": 0,
+  "Moves": [
+    {
+      "Name": "Slash",
+      "Element": "Normal",
+      "Damage": 8,
+      "CriticalChance": 10
+    },
+    {
+      "Name": "Fireball",
+      "Element": "Fire",
+      "Damage": 15,
+      "CriticalChance": 5
+    }
+  ]
 }
