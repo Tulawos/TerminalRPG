@@ -11,7 +11,5 @@ namespace AdventureTest.src
         public int GetCurrentHP();
         public void ResetDamage();        
         public Actions ChooseAction();
-        public Move ChooseMove();
-        public List<Monster> ChooseTarget(List<Monster> targets, Move move);
     }
 }

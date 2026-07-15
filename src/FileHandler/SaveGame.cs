@@ -9,13 +9,13 @@ namespace AdventureTest.src.FileHandler
 {
     public static class SaveGame
     {
-        public static void Save(Player player)
+        public static void Save(MOB player)
         {
             var options = new JsonSerializerOptions();
 
             options.WriteIndented = true;
 
-            string jsonString = JsonSerializer.Serialize<Player>(player, options);
+            string jsonString = JsonSerializer.Serialize<MOB>(player, options);
             File.WriteAllText(
                 "C:\\Users\\aleja\\Desktop\\Software Projects\\AdventureTest\\Files\\player_save_file.json", jsonString);
         }

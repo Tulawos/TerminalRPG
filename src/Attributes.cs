@@ -17,6 +17,6 @@ namespace AdventureTest.src
         public int Accuracy { get; set; }
         public DiceType DamageDie { get; set; }
         public int Xp { get; set; }
-        protected List<Move> activeMoves { get; set; } = [];
+        public List<Move> activeMoves { get; set; } = [];
     }
 }

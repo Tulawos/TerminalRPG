@@ -1,37 +1,57 @@
-﻿using AdventureTest.src.Moves;
+﻿using AdventureTest.src.Dialog;
+using AdventureTest.src.Moves;
 
 namespace AdventureTest.src.BattleActions
 {
     public class Fight : Actions
     {
-        private MOB Attacker;
-        
+        private MOB Attacker;        
         
         public Fight(MOB attacker)
         {
             this.Attacker = attacker;
+            text = new();
         }
 
         public override void Execute(List<Monster> targets)
         {
             Move move = new();
 
-            if(Attacker is Player)
+            if(Attacker is MOB)
             {
                 Player player = (Player)Attacker;
-                move = player.ChooseMove();
-                targets = player.ChooseTarget(targets, move);
+                move = ChooseMove(player);
+                targets = ChooseTarget(player, targets, move);
                 Attack(move, targets);
             }
             else
             {
-                Attacker.ChooseMove();
+                Monster monster = (Monster)Attacker;
+                move = ChooseMove(monster);
             }
         }
 
-        private void Attack(Move move, List<Monster> targets)
+        private Move ChooseMove(Player player)
         {
-            
+            text.AvailableMovePrint(player);
+            int response = text.ChooseMoveHandler(player);
+            return player.activeMoves[response - 1];
+        }
+
+        private Move ChooseMove(Monster monster)
+        {
+            return new Move();
+        }
+
+        private List<Monster> ChooseTarget(Player player, List<Monster> targets, Move move)
+        {
+            text.AvailabeTargetsPrint(targets);
+            List<Monster> results = text.ChooseTargetsHandler(player, targets, move);
+            return results;
+        }
+
+        private void Attack(Move move, List<Monster> targets)
+        {            
             foreach (var target in targets)
             {
                 int attackRoll = Dice.Roll(DiceType.D20) + Attacker.Accuracy;
@@ -39,14 +59,13 @@ namespace AdventureTest.src.BattleActions
                 {
                     int damage = Dice.Roll(Attacker.DamageDie + move.Damage);
                     target.TakeDamage(damage);
-                    Console.WriteLine("You hit " + target + " for " + damage + " damage.");
+                    text.AttackHit(target.Name, damage);
                 }
                 else 
                 {
-                    Console.WriteLine("Your attack missed.");
+                    text.AttackMissed();
                 }
-
-                Console.WriteLine(target.Name + " remaining HP: " + target.GetCurrentHP() + "/" + target.MaxHp);                
+                text.TargetRemainingHP(target);                
             }
         }
     }

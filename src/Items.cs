@@ -23,11 +23,5 @@ namespace AdventureTest.src
             this.hitModifier = hitModifier;
             damageDie = DiceType.D0;
         }
-
-
-        public DiceType SetDamageDie(/*string damageDie*/)
-        {
-            return DiceType.D4;
-        }
     }
 }

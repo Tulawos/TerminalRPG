@@ -17,6 +17,11 @@ namespace AdventureTest.src
             movesList = new(LoadGame.LoadMoves(list[2]));
 
             player.SetMoves(movesList);
+
+            foreach (var monster in monsters.Values)
+            {
+                monster.SetMoves(movesList);
+            }
         }
     }
 }

@@ -27,16 +27,9 @@ namespace AdventureTest.src
         public int GetCurrentHP() => MaxHp - Damage;
         public int RollInitiative() => Dice.Roll(DiceType.D20) + Accuracy;       
 
-        public virtual Actions ChooseAction(){ return new Fight(this); }
-
-        public virtual Move ChooseMove()
-        {
-            return new Move();
-        }
-
-        public virtual List<Monster> ChooseTarget(List<Monster> targets, Move move)
-        {
-            return new List<Monster>();
+        public virtual Actions ChooseAction()
+        { 
+            return new Fight(this); 
         }
     }
 }

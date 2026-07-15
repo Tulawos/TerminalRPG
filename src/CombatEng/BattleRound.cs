@@ -25,7 +25,7 @@ namespace AdventureTest.src.CombatEng
             while (combatants.Count != 0)
             {
                 var combatant = combatants.Dequeue();
-                if (combatant is Player)
+                if (combatant is MOB)
                 {
                     turn.Turn(player, monsters);
                 }
