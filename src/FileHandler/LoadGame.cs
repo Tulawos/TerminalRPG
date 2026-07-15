@@ -4,21 +4,21 @@ namespace AdventureTest.src.FileHandler
 {
     public class LoadGame
     {
-        public Player LoadPlayer(string fileName)
+        public static Player LoadPlayer(string fileName)
         {
             FileHandler<Player> playerFile = new();
             return playerFile.Load(fileName);
         }
 
-        public Dictionary<int, MOB> LoadMonsters(string fileName)
+        public static Dictionary<int, Monster> LoadMonsters(string fileName)
         {
-            FileHandler<List<MOB>> monsterFile = new();
-            Dictionary<int, MOB> monsterDictionary = Util.ConvertListToMap(monsterFile.Load(fileName));
-            return monsterDictionary;
+            FileHandler<List<Monster>> monsterFile = new();
+            return Util.ConvertListToMap(monsterFile.Load(fileName));
         }
-        public Dictionary<string, Move> LoadMoves(string fileName)
+        public static Dictionary<string, Move> LoadMoves(string fileName)
         {
             FileHandler<List<Move>> moveFile = new();
+            List<Move> list = moveFile.Load(fileName);
             Dictionary<string, Move> moveDictionary = Util.ConvertListToMap(moveFile.Load(fileName));
             return moveDictionary;
         }

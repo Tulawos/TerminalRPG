@@ -9,6 +9,16 @@
         }
         
         public Move GetMoveByName(string name) => Moves[name];
+
+        public List<Move> GetListOfMoves(List<string> moveNames)
+        {
+            List<Move> list = new List<Move>();
+            foreach(var moveName in moveNames)
+            {
+                list.Add(Moves[moveName]);
+            }
+            return list;
+        }
         
     }
 }

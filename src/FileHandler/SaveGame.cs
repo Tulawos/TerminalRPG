@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace AdventureTest.src.FileHandler
 {
-    public class SaveGame
+    public static class SaveGame
     {
-        public void Save(Player player)
+        public static void Save(Player player)
         {
             var options = new JsonSerializerOptions();
 

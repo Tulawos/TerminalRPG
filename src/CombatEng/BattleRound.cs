@@ -9,10 +9,10 @@ namespace AdventureTest.src.CombatEng
     public class BattleRound
     {
         Player player;
-        List<MOB> monsters;
+        List<Monster> monsters;
         Queue<ICombatant> combatants;
 
-        public BattleRound(Player player, List<MOB> monsters, Queue<ICombatant> combatants)
+        public BattleRound(Player player, List<Monster> monsters, Queue<ICombatant> combatants)
         {
             this.player = player;
             this.monsters = monsters;
@@ -31,7 +31,7 @@ namespace AdventureTest.src.CombatEng
                 }
                 else
                 {
-                    MOB monster = (MOB)combatant;
+                    Monster monster = (Monster)combatant;
                     turn.Turn(monster, player, monsters);
                 }
             }

@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AdventureTest.src.BattleActions;
 
 namespace AdventureTest.src.CombatEng
 {
     internal class CombatantTurn
     {
-        public void Turn(Player player, List<MOB> monsters)
+        public void Turn(Player player, List<Monster> monsters)
         {
-            player.ChooseAction(monsters);
+            Actions action = player.ChooseAction();
+            
+            action.Execute(monsters);
         }
 
-        public void Turn(MOB monster, Player player, List<MOB> monsters)
+        public void Turn(Monster monster, Player player, List<Monster> monsters)
         {
             int attackRoll = Dice.Roll(DiceType.D20) + monster.Accuracy;
 

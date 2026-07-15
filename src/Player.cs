@@ -1,40 +1,93 @@
-﻿using AdventureTest.src.Moves;
-using AdventureTest.src.BattleActions;
+﻿using AdventureTest.src.BattleActions;
+using AdventureTest.src.Moves;
+using Google.GenAI.Types;
+using System;
 
 namespace AdventureTest.src
 {    
     public class Player : MOB
     {
-        private List<Move> Moves = [];
+        private InputHandler inputHandler = new();
+        private List<string> availableMoves = [];
 
         public Player(string name, int level, int maxHp, int damage, int defense, int accuracy, DiceType damageDie, int xp) 
             :base(name, level, maxHp, damage, defense, accuracy, damageDie, xp)
         {
-            SetMoves();
+            
         }
         public void AddXP(int xpEarned) => Xp += xpEarned; 
         
-        public Actions ChooseAction(List<MOB> target)
+        public override Actions ChooseAction()
         {
+            return new Fight(this);
+        } 
+
+        public override Move ChooseMove()
+        {
+            int i = 1;
+
+            Console.WriteLine("Available moves:");
+            foreach (var move in activeMoves)
+            {
+                Console.WriteLine(i + ". " + move.Name);
+                i++;
+            }
+
+            Console.Write("\nChoose a move: ");
+            int response = inputHandler.GetIntInput();
+
+            while (!inputHandler.InputWithinRange(response, activeMoves.Count))
+            {
+                Console.WriteLine("Incorrect input. Please choose an input within range");
+                response = inputHandler.GetIntInput();
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("You have chosen " + activeMoves[response - 1].Name + ".\n");
+            return activeMoves[response - 1];
+        }
+        
+        public override List<Monster> ChooseTarget(List<Monster> targets, Move move)
+        {
+            int i = 1;
+            List<Monster> chosenTargets = new List<Monster>();
+
             
-            return new Fight(this, target);
-        }        
+            Console.WriteLine("Available targets: ");
+            foreach (var target in targets)
+            {
+                Console.WriteLine(i + " " + target.Name);
+                i++;
+            }
 
-        public Move ChooseMove()
-        {
-            Move move = new();
+            Console.Write("\nChoose a target: ");
 
+            while (chosenTargets.Count < move.NumberOfTargets || chosenTargets.Count == targets.Count)
+            {
+                int response = inputHandler.GetIntInput();
 
-            // Implement logic to choose a move based on player input or strategy
-            // For now, we can return a default move or implement a simple selection mechanism
-            return new Move(); // Placeholder for actual move selection logic
+                while (!inputHandler.InputWithinRange(response, targets.Count))
+                {
+                    Console.WriteLine("Incorrect input. Please choose an input within range");
+                    response = inputHandler.GetIntInput();
+                }
+                chosenTargets.Add(targets[response - 1]);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("You have chosen to attack: ");
+            foreach (var mon in chosenTargets) Console.WriteLine(mon.Name);
+            Console.WriteLine();
+
+            return chosenTargets;
         }
 
-        private void SetMoves()
+        public void SetMoves(MovesList movesList)
         {
             // Implement logic to set the player's moves based on their level or other criteria
             // For now, we can add some default moves or implement a simple selection mechanism
-
+            activeMoves.Add(movesList.GetMoveByName("Slash"));
+            activeMoves.Add(movesList.GetMoveByName("Fireball"));
         }
     }
 }

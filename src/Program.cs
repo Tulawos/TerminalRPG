@@ -11,20 +11,16 @@ namespace AdventureTest.src
     {
         static void Main()
         {            
-            LoadGame loadGame = new();
-            SaveGame saveGame = new();
+            List<string> list = new List<string>();
+            list.Add("C:\\Users\\aleja\\Desktop\\Software Projects\\AdventureTest\\Files\\player.json"); //player
+            list.Add("C:\\Users\\aleja\\Desktop\\Software Projects\\AdventureTest\\Files\\monsters.json"); //monsters
+            list.Add("C:\\Users\\aleja\\Desktop\\Software Projects\\AdventureTest\\Files\\moves.json"); //moves
 
-            var player = loadGame.LoadPlayer(
-                "C:\\Users\\aleja\\Desktop\\Software Projects\\AdventureTest\\Files\\player.json");
-            var monsters = loadGame.LoadMonsters(
-                "C:\\Users\\aleja\\Desktop\\Software Projects\\AdventureTest\\Files\\monsters.json");
-            var moves = loadGame.LoadMoves(
-                "C:\\Users\\aleja\\Desktop\\Software Projects\\AdventureTest\\Files\\moves.json");
-
-            MovesList movesList = new(moves);
-            BattleGenerator combat = new(player, monsters);
-            combat.GenerateBattle(player);
-            saveGame.Save(player);
+            GameDatabase gameDatabase = new(list);       
+            
+            BattleGenerator combat = new(gameDatabase.player, gameDatabase.monsters);
+            combat.GenerateBattle();
+            SaveGame.Save(gameDatabase.player);
         }
     }
 }

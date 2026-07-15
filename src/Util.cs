@@ -14,12 +14,12 @@ namespace AdventureTest.src
             return moveMap;
         }
 
-        public static Dictionary<int, MOB> ConvertListToMap(List<MOB> mobs)
+        public static Dictionary<int, Monster> ConvertListToMap(List<Monster> mobs)
         {
-            Dictionary<int, MOB> mobMap = [];
+            Dictionary<int, Monster> mobMap = [];
             foreach (var mob in mobs)
             {
-                mobMap[mob.ID] = mob;
+                mobMap[mob.Id] = mob;
             }
             return mobMap;
         }

@@ -5,7 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AdventureTest.src.BattleActions
-{    public class Flee : Actions
+{
+    public class Flee : Actions
     {
-     }
+        public override void Execute(List<Monster> targets)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

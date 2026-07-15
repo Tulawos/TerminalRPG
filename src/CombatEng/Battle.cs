@@ -3,9 +3,9 @@
     public class Battle
     {
         readonly Player player;
-        readonly List<MOB> monsters;
+        readonly List<Monster> monsters;
 
-        public Battle(Player player, List<MOB> monsters)
+        public Battle(Player player, List<Monster> monsters)
         {
             this.player = player;
             this.monsters = monsters;
@@ -51,7 +51,6 @@
             var sortedList = characterLists.OrderByDescending(c => c.Initiative).ToList();
 
             return sortedList;
-        }
-        
+        }        
     }
 }

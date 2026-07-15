@@ -19,6 +19,72 @@
     "Accuracy": 5,
     "DamageDie": 8,
     "Xp": 50,
-    "ID": 1
+    "Id": 1
+  },
+  {
+    "Name": "Cave Bat",
+    "Level": 1,
+    "MaxHp": 8,
+    "Damage": 0,
+    "Defense": 12,
+    "Accuracy": 3,
+    "DamageDie": 4,
+    "Xp": 10,
+    "ID": 2
+  },
+  {
+    "Name": "Skeleton Archer",
+    "Level": 2,
+    "MaxHp": 18,
+    "Damage": 0,
+    "Defense": 11,
+    "Accuracy": 4,
+    "DamageDie": 6,
+    "Xp": 30,
+    "Id": 3
+  },
+  {
+    "Name": "Zombie Brawler",
+    "Level": 2,
+    "MaxHp": 22,
+    "Damage": 0,
+    "Defense": 8,
+    "Accuracy": 2,
+    "DamageDie": 6,
+    "Xp": 35,
+    "Id": 4
+  },
+  {
+    "Name": "Giant Spider",
+    "Level": 3,
+    "MaxHp": 28,
+    "Damage": 0,
+    "Defense": 13,
+    "Accuracy": 5,
+    "DamageDie": 8,
+    "Xp": 55,
+    "Id": 5
+  },
+  {
+    "Name": "Shadow Hound",
+    "Level": 4,
+    "MaxHp": 35,
+    "Damage": 0,
+    "Defense": 15,
+    "Accuracy": 6,
+    "DamageDie": 10,
+    "Xp": 80,
+    "Id": 6
+  },
+  {
+    "Name": "Stone Golem",
+    "Level": 5,
+    "MaxHp": 50,
+    "Damage": 0,
+    "Defense": 18,
+    "Accuracy": 4,
+    "DamageDie": 12,
+    "Xp": 120,
+    "Id": 7
   }
 ]

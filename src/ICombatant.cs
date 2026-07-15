@@ -1,4 +1,7 @@
-﻿namespace AdventureTest.src
+﻿using AdventureTest.src.BattleActions;
+using AdventureTest.src.Moves;
+
+namespace AdventureTest.src
 {
     public interface ICombatant
     {
@@ -6,6 +9,9 @@
         public int RollInitiative();
         public void TakeDamage(int damageReceived);
         public int GetCurrentHP();
-        public void ResetDamage();
+        public void ResetDamage();        
+        public Actions ChooseAction();
+        public Move ChooseMove();
+        public List<Monster> ChooseTarget(List<Monster> targets, Move move);
     }
 }

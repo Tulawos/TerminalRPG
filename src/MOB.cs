@@ -1,4 +1,5 @@
 ﻿
+using AdventureTest.src.BattleActions;
 using AdventureTest.src.Moves;
 using System.Collections.Generic;
 
@@ -6,7 +7,6 @@ namespace AdventureTest.src
 {
     public class MOB : Attributes, ICombatant
     {
-        public int ID { get; private set; }
         public int Initiative { get; private set; }
 
         public MOB() { }
@@ -27,27 +27,16 @@ namespace AdventureTest.src
         public int GetCurrentHP() => MaxHp - Damage;
         public int RollInitiative() => Dice.Roll(DiceType.D20) + Accuracy;       
 
-        public virtual void ChooseAction(MOB target)
+        public virtual Actions ChooseAction(){ return new Fight(this); }
+
+        public virtual Move ChooseMove()
         {
-            Fight(target);
-            
-        }
-        public virtual void Fight(MOB target)
-        {
-            ChooseMove();
-            int attackRoll = Dice.Roll(DiceType.D20) + Accuracy;
-            if (attackRoll >= target.Defense)
-            {
-                int damage = Dice.Roll(DamageDie);
-                target.TakeDamage(damage);
-            }
+            return new Move();
         }
 
-        private void ChooseMove()
+        public virtual List<Monster> ChooseTarget(List<Monster> targets, Move move)
         {
-            
+            return new List<Monster>();
         }
-
-
     }
 }

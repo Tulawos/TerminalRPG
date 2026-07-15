@@ -6,19 +6,34 @@ using System.Threading.Tasks;
 
 namespace AdventureTest.src
 {
-    internal class InputHandler
+    public class InputHandler
     {
-        public static int GetInput()
+        public string GetInput()
         {
             string response = Console.ReadLine();
-            bool success = int.TryParse(response, out int input);
-
-            if (success) return input;
-            else
+            while (string.IsNullOrWhiteSpace(response))
             {
-                Console.WriteLine("Invalid input. Please enter a number.");
-                return GetInput();
+                Console.WriteLine("Input cannot be empty. Please enter a valid input:");
+                response = Console.ReadLine();
             }
+
+            return response;
         }
+
+        public int GetIntInput()
+        {
+            int result;
+            string response = GetInput();
+
+            while(!int.TryParse(response, out result))
+            {
+                Console.WriteLine(response + " is not a valid input. Please enter a valid input.");
+                response = GetInput();
+            }
+            return result;
+        }
+
+        public bool InputWithinRange(int input, int size) => (input < 1 || input > size) ? false : true;
+        
     }
 }

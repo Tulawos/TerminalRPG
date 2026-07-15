@@ -1,25 +1,52 @@
-﻿namespace AdventureTest.src.BattleActions
+﻿using AdventureTest.src.Moves;
+
+namespace AdventureTest.src.BattleActions
 {
     public class Fight : Actions
     {
         private MOB Attacker;
-        private List<MOB> Defenders;
-        public Fight(MOB attacker, List<MOB> defender)
+        
+        
+        public Fight(MOB attacker)
         {
             this.Attacker = attacker;
-            this.Defenders = defender;
         }
 
-        public void Execute(List<MOB> Defenders)
+        public override void Execute(List<Monster> targets)
         {
-            int attackRoll = Dice.Roll(DiceType.D20) + Attacker.Accuracy;
-            foreach (var defender in Defenders)
+            Move move = new();
+
+            if(Attacker is Player)
             {
-                if (attackRoll >= defender.Defense)
+                Player player = (Player)Attacker;
+                move = player.ChooseMove();
+                targets = player.ChooseTarget(targets, move);
+                Attack(move, targets);
+            }
+            else
+            {
+                Attacker.ChooseMove();
+            }
+        }
+
+        private void Attack(Move move, List<Monster> targets)
+        {
+            
+            foreach (var target in targets)
+            {
+                int attackRoll = Dice.Roll(DiceType.D20) + Attacker.Accuracy;
+                if (attackRoll >= target.Defense)
                 {
-                    int damage = Dice.Roll(Attacker.DamageDie);
-                    defender.TakeDamage(damage);
+                    int damage = Dice.Roll(Attacker.DamageDie + move.Damage);
+                    target.TakeDamage(damage);
+                    Console.WriteLine("You hit " + target + " for " + damage + " damage.");
                 }
+                else 
+                {
+                    Console.WriteLine("Your attack missed.");
+                }
+
+                Console.WriteLine(target.Name + " remaining HP: " + target.GetCurrentHP() + "/" + target.MaxHp);                
             }
         }
     }
