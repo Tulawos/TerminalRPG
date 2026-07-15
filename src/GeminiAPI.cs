@@ -16,6 +16,7 @@ namespace AdventureTest.src
             var client = new Client();
             var response = await client.Models.GenerateContentAsync(model, prompt);
             Console.WriteLine(response.Text);
+            Console.WriteLine();
         }
     }
 }
