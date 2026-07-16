@@ -1,4 +1,4 @@
-﻿using AdventureTest.src.Dialog;
+﻿using AdventureTest.src.GameView;
 using AdventureTest.src.Moves;
 
 namespace AdventureTest.src.BattleActions
@@ -10,7 +10,6 @@ namespace AdventureTest.src.BattleActions
         public Fight(MOB attacker)
         {
             this.Attacker = attacker;
-            text = new();
         }
 
         public override void Execute(List<Monster> targets)

@@ -1,7 +1,6 @@
 ﻿
 using AdventureTest.src.BattleActions;
-using AdventureTest.src.Moves;
-using System.Collections.Generic;
+using AdventureTest.src.GameView;
 
 namespace AdventureTest.src
 {
@@ -22,7 +21,11 @@ namespace AdventureTest.src
             Xp = xp;   
         }
 
-        public void TakeDamage(int damageReceived) => Damage += damageReceived;
+        public void TakeDamage(int damageReceived)
+        {
+            Damage += damageReceived;
+            if(Damage >= MaxHp) Damage = MaxHp;
+        }
         public void ResetDamage() => Damage = 0;
         public int GetCurrentHP() => MaxHp - Damage;
         public int RollInitiative() => Dice.Roll(DiceType.D20) + Accuracy;       

@@ -17,7 +17,7 @@ namespace AdventureTest.src.FileHandler
 
             string jsonString = JsonSerializer.Serialize<MOB>(player, options);
             File.WriteAllText(
-                "C:\\Users\\aleja\\Desktop\\Software Projects\\AdventureTest\\Files\\player_save_file.json", jsonString);
+                "C:\\Users\\aleja\\Desktop\\Software Projects\\TerminalRPG\\Files\\player_save_file.json", jsonString);
         }
     }
 }

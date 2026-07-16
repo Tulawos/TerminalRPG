@@ -1,6 +1,6 @@
 ﻿using AdventureTest.src.BattleActions;
 using AdventureTest.src.Moves;
-using AdventureTest.src.Dialog;
+using AdventureTest.src.GameView;
 
 namespace AdventureTest.src
 {    

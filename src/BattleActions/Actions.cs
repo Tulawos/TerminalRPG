@@ -1,11 +1,10 @@
-﻿using AdventureTest.src.Dialog;
-using Google.Apis.Http;
+﻿using AdventureTest.src.GameView;
 
 namespace AdventureTest.src.BattleActions
 {
     public abstract class Actions
     {
-        protected CombatText text;
+        public FightView text = new FightView();
         public abstract void Execute(List<Monster> targets);
     }
 }

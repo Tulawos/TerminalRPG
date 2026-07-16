@@ -1,23 +1,13 @@
 ﻿using AdventureTest.src.Moves;
-using static Google.Apis.Requests.BatchRequest;
-namespace AdventureTest.src.Dialog
+
+namespace AdventureTest.src.GameView
 {
-    public class CombatText
+    public class FightView : CombatView
     {
-        private TextSpeedHandler speedHandler;
-        private int mediumSpeed = 50;
-        private int fastSpeed = 25;
-
-        public CombatText()
+        public void AvailableMovePrint(Player player)
         {
-            speedHandler = new TextSpeedHandler();
-        }
-
-        public void AvailableMovePrint(MOB player)
-        {
-
             speedHandler.TextSpeed("Available moves:", mediumSpeed);
-            for (int i = 0; i < player.activeMoves.Count; i++) 
+            for (int i = 0; i < player.activeMoves.Count; i++)
             {
                 speedHandler.TextSpeed(i + 1 + ". " + player.activeMoves[i].Name, fastSpeed);
             }
@@ -37,7 +27,7 @@ namespace AdventureTest.src.Dialog
         public void AvailabeTargetsPrint(List<Monster> targets)
         {
             speedHandler.TextSpeed("Available targets: ", mediumSpeed);
-            for(int i = 0; i < targets.Count; i++)
+            for (int i = 0; i < targets.Count; i++)
             {
                 speedHandler.TextSpeed(i + 1 + " " + targets[i].Name, fastSpeed);
             }

@@ -12,9 +12,9 @@ namespace AdventureTest.src
         static void Main()
         {            
             List<string> list = new List<string>();
-            list.Add("C:\\Users\\aleja\\Desktop\\Software Projects\\AdventureTest\\Files\\player.json"); //player
-            list.Add("C:\\Users\\aleja\\Desktop\\Software Projects\\AdventureTest\\Files\\monsters.json"); //monsters
-            list.Add("C:\\Users\\aleja\\Desktop\\Software Projects\\AdventureTest\\Files\\moves.json"); //moves
+            list.Add("C:\\Users\\aleja\\Desktop\\Software Projects\\TerminalRPG\\Files\\player.json"); //player
+            list.Add("C:\\Users\\aleja\\Desktop\\Software Projects\\TerminalRPG\\Files\\monsters.json"); //monsters
+            list.Add("C:\\Users\\aleja\\Desktop\\Software Projects\\TerminalRPG\\Files\\Moves.json"); //moves
 
             GameDatabase gameDatabase = new(list);       
             
