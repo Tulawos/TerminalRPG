@@ -28,7 +28,7 @@ namespace AdventureTest.src.BattleActions
                 Monster monster = (Monster)Attacker;
                 move = ChooseMove(monster);
             }
-        }
+        }        
 
         private Move ChooseMove(Player player)
         {

@@ -38,7 +38,7 @@ namespace AdventureTest.src.GameView
             List<Monster> chosenTargets = new List<Monster>();
             speedHandler.TextSpeed("\nChoose a target: ", mediumSpeed);
 
-            while (chosenTargets.Count < move.NumberOfTargets || chosenTargets.Count == targets.Count)
+            while (chosenTargets.Count < move.NumberOfTargets && chosenTargets.Count < targets.Count)
             {
                 int response = InputVerifier(player, targets.Count);
                 chosenTargets.Add(targets[response - 1]);

@@ -22,14 +22,14 @@
 
                 BattleRound battleRound = new(player, monsters, turnOrder);
                 battleRound.Round();
+                RemoveDeadMonsters();
             }
         }
 
         private Queue<ICombatant> SetTurnOrder()
         {
             Queue<ICombatant> turnOrder = new();
-            var characters = SetInitiatives();
-            
+            var characters = SetInitiatives();            
             foreach(var character in characters) turnOrder.Enqueue(character);
 
             return turnOrder;
@@ -51,6 +51,12 @@
             var sortedList = characterLists.OrderByDescending(c => c.Initiative).ToList();
 
             return sortedList;
-        }        
+        }
+
+
+        private void RemoveDeadMonsters()
+        {
+            monsters.RemoveAll(monster => monster.GetCurrentHP() <= 0);
+        }
     }
 }

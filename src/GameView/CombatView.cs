@@ -4,7 +4,7 @@ namespace AdventureTest.src.GameView
     public class CombatView
     {
         protected TextSpeedHandler speedHandler;
-        protected int mediumSpeed = 50;
+        protected int mediumSpeed = 25;
         protected int fastSpeed = 25;
 
         public CombatView()

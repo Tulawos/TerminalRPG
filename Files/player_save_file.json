@@ -1,5 +1,4 @@
 {
-  "ID": 0,
   "Initiative": 0,
   "Name": "Hero",
   "Level": 1,
@@ -8,5 +7,19 @@
   "Defense": 12,
   "Accuracy": 4,
   "DamageDie": 8,
-  "Xp": 0
+  "Xp": 0,
+  "activeMoves": [
+    {
+      "Name": "Slash",
+      "Element": 8,
+      "NumberOfTargets": 1,
+      "Damage": 800
+    },
+    {
+      "Name": "Fireball",
+      "Element": 0,
+      "NumberOfTargets": 4,
+      "Damage": 15
+    }
+  ]
 }

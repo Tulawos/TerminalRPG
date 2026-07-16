@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventureTest.src.BattleActions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,21 +21,28 @@ namespace AdventureTest.src.CombatEng
         }
 
         public void Round()
-        {
-            CombatantTurn turn = new();
-            while (combatants.Count != 0)
+        { 
+            var combatant = combatants.Dequeue();
+            if (combatant is Player)
             {
-                var combatant = combatants.Dequeue();
-                if (combatant is MOB)
-                {
-                    turn.Turn(player, monsters);
-                }
-                else
-                {
-                    Monster monster = (Monster)combatant;
-                    turn.Turn(monster, player, monsters);
-                }
+                Turn();
             }
+            else
+            {
+                Monster monster = (Monster)combatant;
+                Turn(monster);
+            }
+        }
+
+        public void Turn()
+        {
+            Actions action = player.ChooseAction();
+            action.Execute(monsters);
+        }
+
+        public void Turn(Monster monster)
+        {
+
         }
     }
 }
