@@ -1,20 +1,16 @@
 ﻿using AdventureTest.src.CombatEng;
 using AdventureTest.src.FileHandler;
-using AdventureTest.src.Moves;
-using Google.GenAI;
-using System;
-using System.Numerics;
 
 namespace AdventureTest.src
 {
     public class Program 
     {
-        static void Main()
+        static void Main(string[] args)
         {            
             List<string> list = new List<string>();
-            list.Add("C:\\Users\\aleja\\Desktop\\Software Projects\\TerminalRPG\\Files\\player.json"); //player
-            list.Add("C:\\Users\\aleja\\Desktop\\Software Projects\\TerminalRPG\\Files\\monsters.json"); //monsters
-            list.Add("C:\\Users\\aleja\\Desktop\\Software Projects\\TerminalRPG\\Files\\Moves.json"); //moves
+            list.Add(args[0]); //player
+            list.Add(args[1]); //monsters
+            list.Add(args[2]); //moves
 
             GameDatabase gameDatabase = new(list);       
             

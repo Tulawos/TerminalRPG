@@ -364,3 +364,6 @@ FodyWeavers.xsd
 
 #API KEY
 .env
+
+#LaunchSettings
+launchSettings.json
