@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Collections.Specialized.BitVector32;
 
 namespace AdventureTest.src.CombatEng
 {
@@ -21,28 +22,32 @@ namespace AdventureTest.src.CombatEng
         }
 
         public void Round()
-        { 
-            var combatant = combatants.Dequeue();
-            if (combatant is Player)
+        {
+            while (combatants.Count > 0)
             {
-                Turn();
-            }
-            else
-            {
-                Monster monster = (Monster)combatant;
-                Turn(monster);
+                var combatant = combatants.Dequeue();
+                if (combatant is Player)
+                {
+                    Turn();
+                }
+                else
+                {
+                    Monster monster = (Monster)combatant;
+                    Turn(monster);
+                }
             }
         }
 
         public void Turn()
         {
             Actions action = player.ChooseAction();
-            action.Execute(monsters);
+            action.Execute(monsters, player);
         }
 
         public void Turn(Monster monster)
         {
-
+            Fight fight = new Fight(monster);
+            fight.Execute(monsters, player);
         }
     }
 }

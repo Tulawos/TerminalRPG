@@ -14,14 +14,15 @@
         public void BattleStart()//remove round
         {
             int round = 0;
-
-            while (player.MaxHp > 0 && monsters.Count > 0 && round < 10)
+            while (player.GetCurrentHP() > 0 && monsters.Count > 0 && round < 10)
             {
                 Queue<ICombatant> turnOrder = SetTurnOrder();
                 round++;
 
                 BattleRound battleRound = new(player, monsters, turnOrder);
                 battleRound.Round();
+
+
                 RemoveDeadMonsters();
             }
         }

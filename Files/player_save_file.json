@@ -1,19 +1,11 @@
 {
   "Initiative": 0,
-  "Name": "Hero",
-  "Level": 1,
-  "MaxHp": 30,
-  "Damage": 0,
-  "Defense": 12,
-  "Accuracy": 4,
-  "DamageDie": 8,
-  "Xp": 0,
   "activeMoves": [
     {
       "Name": "Slash",
       "Element": 8,
       "NumberOfTargets": 1,
-      "Damage": 800
+      "Damage": 8
     },
     {
       "Name": "Fireball",
@@ -21,5 +13,13 @@
       "NumberOfTargets": 4,
       "Damage": 15
     }
-  ]
+  ],
+  "Name": "Hero",
+  "Level": 1,
+  "MaxHp": 30,
+  "Damage": 0,
+  "Defense": 12,
+  "Accuracy": 4,
+  "DamageDie": 8,
+  "Xp": 0
 }

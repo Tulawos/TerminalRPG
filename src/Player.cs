@@ -7,7 +7,6 @@ namespace AdventureTest.src
     public class Player : MOB
     {
         public InputHandler inputHandler { get; private set; } = new();
-        private List<string> availableMoves = [];
 
         public Player(string name, int level, int maxHp, int damage, int defense, int accuracy, DiceType damageDie, int xp) 
             :base(name, level, maxHp, damage, defense, accuracy, damageDie, xp)

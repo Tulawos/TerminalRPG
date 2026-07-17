@@ -8,7 +8,7 @@
     "Accuracy": 2,
     "DamageDie": 4,
     "Xp": 15,
-    "ID": 0
+    "Id": 0
   },
   {
     "Name": "Orc Warrior",
@@ -30,7 +30,7 @@
     "Accuracy": 3,
     "DamageDie": 4,
     "Xp": 10,
-    "ID": 2
+    "Id": 2
   },
   {
     "Name": "Skeleton Archer",

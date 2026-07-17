@@ -15,6 +15,8 @@ namespace AdventureTest.src
         public void SetMoves(MovesList movesList)
         {
             activeMoves.Add(movesList.GetMoveByName("Slash"));
+            activeMoves.Add(movesList.GetMoveByName("Shadow Stab"));
+            activeMoves.Add(movesList.GetMoveByName("Holy Smite"));
         }
     }
 }

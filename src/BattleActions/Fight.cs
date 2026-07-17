@@ -12,11 +12,11 @@ namespace AdventureTest.src.BattleActions
             this.Attacker = attacker;
         }
 
-        public override void Execute(List<Monster> targets)
+        public override void Execute(List<Monster> targets, Player playerTarget)
         {
             Move move = new();
 
-            if(Attacker is MOB)
+            if(Attacker is Player)
             {
                 Player player = (Player)Attacker;
                 move = ChooseMove(player);
@@ -27,6 +27,7 @@ namespace AdventureTest.src.BattleActions
             {
                 Monster monster = (Monster)Attacker;
                 move = ChooseMove(monster);
+                Attack(move, playerTarget);
             }
         }        
 
@@ -39,7 +40,9 @@ namespace AdventureTest.src.BattleActions
 
         private Move ChooseMove(Monster monster)
         {
-            return new Move();
+            Random rand = new Random();
+            Move chosenMove = monster.activeMoves[rand.Next(0, monster.activeMoves.Count)];
+            return chosenMove;
         }
 
         private List<Monster> ChooseTarget(Player player, List<Monster> targets, Move move)
@@ -58,14 +61,31 @@ namespace AdventureTest.src.BattleActions
                 {
                     int damage = Dice.Roll(Attacker.DamageDie + move.Damage);
                     target.TakeDamage(damage);
-                    text.AttackHit(target.Name, damage);
+                    text.AttackHit(Attacker, target.Name, damage);
                 }
                 else 
                 {
-                    text.AttackMissed();
+                    text.AttackMissed(Attacker);
                 }
                 text.TargetRemainingHP(target);                
             }
+        }
+
+        private void Attack(Move move, Player target)
+        {
+            text.MonsterAttacking(Attacker.Name, move.Name);
+            int attackRoll = Dice.Roll(DiceType.D20) + Attacker.Accuracy;
+            if (attackRoll >= target.Defense)
+            {
+                int damage = Dice.Roll(Attacker.DamageDie + move.Damage);
+                target.TakeDamage(damage);
+                text.AttackHit(Attacker, Attacker.Name, damage);
+            }
+            else
+            {
+                text.AttackMissed(Attacker);
+            }
+            text.TargetRemainingHP(target);
         }
     }
 }

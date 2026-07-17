@@ -1,4 +1,5 @@
 ﻿using AdventureTest.src.Moves;
+using System.Xml.Linq;
 
 namespace AdventureTest.src.GameView
 {
@@ -64,19 +65,31 @@ namespace AdventureTest.src.GameView
             return response;
         }
 
-        public void AttackHit(string name, int damage)
+        public void AttackHit(MOB attacker, string name, int damage)
         {
-            speedHandler.TextSpeed("You hit " + name + " for " + damage + " damage.", mediumSpeed);
+            if(attacker is Player) 
+                speedHandler.TextSpeed("You hit " + name + " for " + damage + " damage.", mediumSpeed);
+            else
+                speedHandler.TextSpeed(name + " hits you for " + damage + ".", mediumSpeed);
+
         }
 
-        public void AttackMissed()
+        public void AttackMissed(MOB attacker)
         {
-            speedHandler.TextSpeed("Your attack missed.", mediumSpeed);
+            if (attacker is Player)
+                speedHandler.TextSpeed("Your attack missed.", mediumSpeed);
+            else
+                speedHandler.TextSpeed(attacker.Name + "'s attack missed.", mediumSpeed);
         }
 
-        public void TargetRemainingHP(Monster target)
+        public void TargetRemainingHP(MOB target)
         {
-            speedHandler.TextSpeed(target.Name + " remaining HP: " + target.GetCurrentHP() + "/" + target.MaxHp + "\n", 50);
+            speedHandler.TextSpeed(target.Name + " remaining HP: " + target.GetCurrentHP() + "/" + target.MaxHp + "\n", mediumSpeed);
+        }
+
+        public void MonsterAttacking(string monsterName, string moveName)
+        {
+            speedHandler.TextSpeed(monsterName + " attacks you with " + moveName + ".", mediumSpeed);
         }
     }
 }

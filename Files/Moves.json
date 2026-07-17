@@ -3,7 +3,7 @@
     "Name": "Slash",
     "Element": "Normal",
     "NumberOfTargets" : 1,
-    "Damage": 800
+    "Damage": 8
   },
   {
     "Name": "Fireball",
