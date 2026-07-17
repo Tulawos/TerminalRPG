@@ -22,7 +22,6 @@ namespace AdventureTest.src.CombatEng
                 Queue<ICombatant> turnOrder = SetTurnOrder();
                 BattleRound battleRound = new(player, monsters, turnOrder);
                 battleRound.Round();
-                RemoveDeadMonsters();
             }
         }
 
@@ -54,9 +53,6 @@ namespace AdventureTest.src.CombatEng
         }
 
 
-        private void RemoveDeadMonsters()
-        {
-            monsters.RemoveAll(monster => monster.GetCurrentHP() <= 0);
-        }
+        
     }
 }

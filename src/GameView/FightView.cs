@@ -1,4 +1,5 @@
 ﻿using AdventureTest.src.Moves;
+using System.Reflection;
 using System.Xml.Linq;
 
 namespace AdventureTest.src.GameView
@@ -9,9 +10,7 @@ namespace AdventureTest.src.GameView
         {
             speedHandler.TextManipulatorWithSpace("Available moves:", mediumSpeed);
             for (int i = 0; i < player.activeMoves.Count; i++)
-            {
                 speedHandler.TextManipulatorWithSpace(i + 1 + ". " + player.activeMoves[i].Name, fastSpeed);
-            }
         }
 
         public int ChooseMoveHandler(Player player)
@@ -29,22 +28,25 @@ namespace AdventureTest.src.GameView
         {
             Console.Clear();
             BattleStatus(player, targets);
+
+            List<Monster> copyOfMonsters = RemoveDeadMonsters(targets);
             speedHandler.TextManipulatorWithSpace("Available targets: ", mediumSpeed);
-            for (int i = 0; i < targets.Count; i++)
+            for (int i = 0; i < copyOfMonsters.Count; i++)
             {
-                speedHandler.TextManipulatorWithSpace(i + 1 + ". " + targets[i].Name, fastSpeed);
+                speedHandler.TextManipulatorWithSpace(i + 1 + ". " + copyOfMonsters[i].Name, fastSpeed);
             }
         }
 
         public List<Monster> ChooseTargetsHandler(Player player, List<Monster> targets, Move move)
         {
             List<Monster> chosenTargets = new List<Monster>();
+            List<Monster> copyOfMonsters = RemoveDeadMonsters(targets);
             speedHandler.TextManipulatorWithSpace("\nChoose a target: ", mediumSpeed);
 
-            while (chosenTargets.Count < move.NumberOfTargets && chosenTargets.Count < targets.Count)
+            while (chosenTargets.Count < move.NumberOfTargets && chosenTargets.Count < copyOfMonsters.Count)
             {
-                int response = InputVerifier(player, targets.Count);
-                chosenTargets.Add(targets[response - 1]);
+                int response = InputVerifier(player, copyOfMonsters.Count);
+                chosenTargets.Add(copyOfMonsters[response - 1]);
             }
 
             Console.WriteLine();
@@ -53,6 +55,34 @@ namespace AdventureTest.src.GameView
             Console.WriteLine();
 
             return chosenTargets;
+        }
+
+        public void AttackHit(MOB attacker, string name, int damage)
+        {
+            if (attacker is Player)
+                speedHandler.TextManipulatorWithSpace("You hit " + name + " for " + damage + " damage.", mediumSpeed);
+            else
+                speedHandler.TextManipulatorWithSpace(name + " hits you for " + damage + ".", mediumSpeed);  
+            Console.ReadKey();
+        }
+
+        public void AttackMissed(MOB attacker, MOB target)
+        {
+            if (attacker is Player)
+                speedHandler.TextManipulatorWithSpace("Your attack missed " + target.Name + ".", mediumSpeed);
+            else
+                speedHandler.TextManipulatorWithSpace(attacker.Name + "'s attack missed.", mediumSpeed); 
+            Console.ReadKey();
+        }
+
+        public void MonsterAttacking(string monsterName, string moveName)
+        {
+            speedHandler.TextManipulatorWithSpace(monsterName + " attacks you with " + moveName + ".", mediumSpeed);
+        }
+
+        public void PlayerDeadMessage(Player player)
+        {
+            if (player.GetCurrentHP() == 0) speedHandler.TextManipulatorWithSpace("You have died...", mediumSpeed);
         }
 
         private int InputVerifier(Player player, int limit)
@@ -67,36 +97,11 @@ namespace AdventureTest.src.GameView
             return response;
         }
 
-        public void AttackHit(MOB attacker, string name, int damage)
+        private List<Monster> RemoveDeadMonsters(List<Monster> monsters)
         {
-            if (attacker is Player)
-                speedHandler.TextManipulatorWithSpace("You hit " + name + " for " + damage + " damage.", mediumSpeed);
-            else
-            {
-                speedHandler.TextManipulatorWithSpace(name + " hits you for " + damage + ".", mediumSpeed);                
-            }
-            Console.ReadKey();
-        }
-
-        public void AttackMissed(MOB attacker, MOB target)
-        {
-            if (attacker is Player)
-                speedHandler.TextManipulatorWithSpace("Your attack missed " + target.Name + ".", mediumSpeed);
-            else
-            {
-                speedHandler.TextManipulatorWithSpace(attacker.Name + "'s attack missed.", mediumSpeed);                
-            }
-            Console.ReadKey();
-        }
-
-        public void MonsterAttacking(string monsterName, string moveName)
-        {
-            speedHandler.TextManipulatorWithSpace(monsterName + " attacks you with " + moveName + ".", mediumSpeed);
-        }
-
-        public void PlayerDeadMessage(Player player)
-        {
-            if (player.GetCurrentHP() == 0) speedHandler.TextManipulatorWithSpace("You have died...", mediumSpeed);
+            List<Monster> copyOfMonsters = new List<Monster>(monsters);
+            copyOfMonsters.RemoveAll(monster => monster.GetCurrentHP() <= 0);
+            return copyOfMonsters;
         }
     }
 }

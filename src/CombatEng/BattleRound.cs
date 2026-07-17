@@ -24,10 +24,9 @@ namespace AdventureTest.src.CombatEng
 
                 if (combatant is Player)
                     Turn();
-                else
+                else if (combatant.GetCurrentHP() > 0)
                 {
                     Monster monster = (Monster)combatant;
-                    if (monster.GetCurrentHP() <= 0) continue;
                     Turn(monster);
                 }
                 Console.Clear();                
