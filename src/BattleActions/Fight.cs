@@ -28,6 +28,7 @@ namespace AdventureTest.src.BattleActions
                 Monster monster = (Monster)Attacker;
                 move = ChooseMove(monster);
                 Attack(move, playerTarget);
+                text.PlayerDeadMessage(playerTarget);
             }
         }        
 
@@ -47,7 +48,7 @@ namespace AdventureTest.src.BattleActions
 
         private List<Monster> ChooseTarget(Player player, List<Monster> targets, Move move)
         {
-            text.AvailabeTargetsPrint(targets);
+            text.AvailabeTargetsPrint(player, targets);
             List<Monster> results = text.ChooseTargetsHandler(player, targets, move);
             return results;
         }
@@ -65,9 +66,8 @@ namespace AdventureTest.src.BattleActions
                 }
                 else 
                 {
-                    text.AttackMissed(Attacker);
-                }
-                text.TargetRemainingHP(target);                
+                    text.AttackMissed(Attacker, target);
+                }           
             }
         }
 
@@ -83,9 +83,8 @@ namespace AdventureTest.src.BattleActions
             }
             else
             {
-                text.AttackMissed(Attacker);
+                text.AttackMissed(Attacker, target);
             }
-            text.TargetRemainingHP(target);
         }
     }
 }

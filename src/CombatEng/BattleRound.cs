@@ -1,53 +1,56 @@
 ﻿using AdventureTest.src.BattleActions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Collections.Specialized.BitVector32;
+using AdventureTest.src.GameView;
 
 namespace AdventureTest.src.CombatEng
 {
-    public class BattleRound
-    {
-        Player player;
-        List<Monster> monsters;
+    public class BattleRound : Battle
+    {        
         Queue<ICombatant> combatants;
 
-        public BattleRound(Player player, List<Monster> monsters, Queue<ICombatant> combatants)
-        {
-            this.player = player;
-            this.monsters = monsters;
+        public BattleRound(Player player, List<Monster> monsters, Queue<ICombatant> combatants) : 
+            base(player, monsters) 
+        { 
             this.combatants = combatants;
+            view = new FightView();
         }
+        
 
         public void Round()
         {
-            while (combatants.Count > 0)
+            while (RoundCondition())
             {
+                view.BattleStatus(player, monsters);
                 var combatant = combatants.Dequeue();
+
                 if (combatant is Player)
-                {
                     Turn();
-                }
                 else
                 {
                     Monster monster = (Monster)combatant;
+                    if (monster.GetCurrentHP() <= 0) continue;
                     Turn(monster);
                 }
+                Console.Clear();                
             }
         }
 
-        public void Turn()
+        private void Turn()
         {
             Actions action = player.ChooseAction();
             action.Execute(monsters, player);
         }
 
-        public void Turn(Monster monster)
+        private void Turn(Monster monster)
         {
             Fight fight = new Fight(monster);
             fight.Execute(monsters, player);
+        }
+
+        private bool RoundCondition()
+        {
+            if (combatants.Count == 0) return false;
+            else if (player.GetCurrentHP() == 0) return false;
+            else return true;
         }
     }
 }

@@ -30,7 +30,11 @@ namespace AdventureTest.src
         }
         public void ResetDamage() => Damage = 0;
         public int GetCurrentHP() => MaxHp - Damage;
-        public int RollInitiative() => Dice.Roll(DiceType.D20) + Accuracy;       
+        public void RollInitiative()
+        {
+            Initiative = Dice.Roll(DiceType.D20) + Accuracy;
+        }
+              
 
         public virtual Actions ChooseAction()
         { 

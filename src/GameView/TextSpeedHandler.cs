@@ -3,15 +3,25 @@ namespace AdventureTest.src.GameView
 {
     public class TextSpeedHandler
     {
-        public TextSpeedToken TextSpeed(string input, int delay)
-        {
-            return new TextSpeedToken(input, delay);
+        TextSpeedToken speedToken;
+        public TextSpeedHandler() 
+        { 
+            speedToken = new TextSpeedToken();
+        }
+        public void TextManipulatorWithSpace(string input, int delay)
+        { 
+            speedToken.SpeedTextWithLine(input, delay);
+        }
+
+        public void TextManipulatorNoSpace(string input, int delay)
+        { 
+            speedToken.SpeedTextNoLine(input, delay);
         }
     }
 
     public class TextSpeedToken : IDisposable
     {
-        public TextSpeedToken(string message, int delay)
+        public void SpeedTextWithLine(string message, int delay)
         {
             foreach (char c in message)
             {
@@ -19,6 +29,15 @@ namespace AdventureTest.src.GameView
                 Thread.Sleep(delay);
             }
             Console.WriteLine();
+        }
+
+        public void SpeedTextNoLine(string message, int delay)
+        {
+            foreach (char c in message)
+            {
+                Console.Write(c);
+                Thread.Sleep(delay);
+            }
         }
 
         public void Dispose()

@@ -1,28 +1,27 @@
-﻿namespace AdventureTest.src.CombatEng
+﻿using AdventureTest.src.GameView;
+
+namespace AdventureTest.src.CombatEng
 {
     public class Battle
     {
-        readonly Player player;
-        readonly List<Monster> monsters;
+        protected Player player;
+        protected List<Monster> monsters;
+        protected CombatView view;
 
         public Battle(Player player, List<Monster> monsters)
         {
             this.player = player;
             this.monsters = monsters;
+            this.view = new ();
         }
 
         public void BattleStart()//remove round
-        {
-            int round = 0;
-            while (player.GetCurrentHP() > 0 && monsters.Count > 0 && round < 10)
+        {            
+            while (player.GetCurrentHP() > 0 && monsters.Count > 0)
             {
                 Queue<ICombatant> turnOrder = SetTurnOrder();
-                round++;
-
                 BattleRound battleRound = new(player, monsters, turnOrder);
                 battleRound.Round();
-
-
                 RemoveDeadMonsters();
             }
         }

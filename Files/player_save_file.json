@@ -1,5 +1,5 @@
 {
-  "Initiative": 0,
+  "Initiative": 17,
   "activeMoves": [
     {
       "Name": "Slash",
@@ -17,7 +17,7 @@
   "Name": "Hero",
   "Level": 1,
   "MaxHp": 30,
-  "Damage": 0,
+  "Damage": 30,
   "Defense": 12,
   "Accuracy": 4,
   "DamageDie": 8,
