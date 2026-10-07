@@ -1,5 +1,7 @@
 ﻿
 
+using AdventureTest.src.Characters;
+
 namespace AdventureTest.src.CombatEng
 {
     public class BattleGenerator
@@ -16,19 +18,19 @@ namespace AdventureTest.src.CombatEng
         }
         public void GenerateBattle()
         {
-            List<Monster> combatants = GenerateCombatants();
-            Battle battle = new(player, combatants);
+            List<MOB> combatants = GenerateCombatants();
+            Battle battle = new Battle(player, combatants);
             battle.BattleStart();
         }
-        private List<Monster> GenerateCombatants()
+        private List<MOB> GenerateCombatants()
         {
-            List<Monster> combatants = [];
+            List<MOB> combatants = [];
             int numCombatants = rand.Next(1, 4); 
 
             while (combatants.Count <= numCombatants)
             {
                 int index = rand.Next(0, monsters.Count);
-                combatants.Add(monsters[index]);
+                combatants.Add(monsters[index].Copy());
             }
             return combatants;
         }

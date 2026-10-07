@@ -1,4 +1,4 @@
-﻿using AdventureTest.src.Moves;
+﻿using AdventureTest.src.Characters;
 
 namespace AdventureTest.src.FileHandler
 {
@@ -6,21 +6,26 @@ namespace AdventureTest.src.FileHandler
     {
         public static Player LoadPlayer(string fileName)
         {
-            FileHandler<Player> playerFile = new();
-            return playerFile.Load(fileName);
+            FileHandler<CharacterStats> playerFile = new FileHandler<CharacterStats>();
+            CharacterStats characterStats = playerFile.Load(fileName); 
+            return new Player(characterStats);
         }
 
         public static Dictionary<int, Monster> LoadMonsters(string fileName)
         {
-            FileHandler<List<Monster>> monsterFile = new();
-            return Util.ConvertListToMap(monsterFile.Load(fileName));
-        }
-        public static Dictionary<string, Move> LoadMoves(string fileName)
-        {
-            FileHandler<List<Move>> moveFile = new();
-            List<Move> list = moveFile.Load(fileName);
-            Dictionary<string, Move> moveDictionary = Util.ConvertListToMap(moveFile.Load(fileName));
-            return moveDictionary;
+            int i = 0;
+            FileHandler<List<CharacterStats>> monsterFile = new FileHandler<List<CharacterStats>>();
+            List<CharacterStats> monsterStats = monsterFile.Load(fileName);
+            Dictionary<int, Monster> mobMap = new Dictionary<int, Monster>();
+
+            foreach (var stat in monsterStats)
+            {
+                Monster monster = new Monster(stat, i);
+                mobMap[i] = monster;
+                i++;
+            }
+
+            return mobMap;
         }
     }
 }

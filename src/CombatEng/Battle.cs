@@ -1,42 +1,44 @@
-﻿using AdventureTest.src.GameView;
+﻿using AdventureTest.src.Characters;
+using AdventureTest.src.GameView;
 
 namespace AdventureTest.src.CombatEng
 {
     public class Battle
     {
-        protected Player player;
-        protected List<Monster> monsters;
-        protected CombatView view;
+        public Player player { get; private set; }
+        public List<MOB> monsters { get; private set; }
+        public CombatView view { get; private set; }
 
-        public Battle(Player player, List<Monster> monsters)
+        public Battle(Player player, List<MOB> monsters)
         {
             this.player = player;
             this.monsters = monsters;
-            this.view = new ();
+            this.view = new CombatView();
         }
 
-        public void BattleStart()//remove round
+        public void BattleStart()
         {            
             while (player.GetCurrentHP() > 0 && monsters.Count > 0)
             {
-                Queue<ICombatant> turnOrder = SetTurnOrder();
-                BattleRound battleRound = new(player, monsters, turnOrder);
+                Queue<IBattler> turnOrder = SetTurnOrder();
+                BattleRound battleRound = new BattleRound(this, turnOrder);
                 battleRound.Round();
             }
         }
 
-        private Queue<ICombatant> SetTurnOrder()
+        private Queue<IBattler> SetTurnOrder()
         {
-            Queue<ICombatant> turnOrder = new();
+            Queue<IBattler> turnOrder = new();
             var characters = SetInitiatives();            
-            foreach(var character in characters) turnOrder.Enqueue(character);
+            foreach(var character in characters) 
+                turnOrder.Enqueue(character);
 
             return turnOrder;
         }
 
-        private List<ICombatant> SetInitiatives()
+        private List<IBattler> SetInitiatives()
         {
-            List<ICombatant> characterLists = [];
+            List<IBattler> characterLists = [];
 
             player.RollInitiative();
             characterLists.Add(player);
@@ -51,8 +53,5 @@ namespace AdventureTest.src.CombatEng
 
             return sortedList;
         }
-
-
-        
     }
 }

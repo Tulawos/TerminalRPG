@@ -1,9 +1,9 @@
 ﻿using AdventureTest.src.BattleActions;
 using AdventureTest.src.Moves;
 
-namespace AdventureTest.src
+namespace AdventureTest.src.Characters
 {
-    public interface ICombatant
+    public interface IBattler
     {
         public int Initiative { get; }
         public void RollInitiative();

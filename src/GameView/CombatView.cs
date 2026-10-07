@@ -1,4 +1,6 @@
 ﻿
+using AdventureTest.src.Characters;
+
 namespace AdventureTest.src.GameView
 {
     public class CombatView
@@ -13,15 +15,18 @@ namespace AdventureTest.src.GameView
             speedHandler = new TextSpeedHandler();
         }
 
-        public void BattleStatus(Player player, List<Monster> monsters)
+        public void BattleStatus(Player player, List<MOB> monsters)
         {
-            speedHandler.TextManipulatorWithSpace(player.Name + " HP: " 
-                + player.GetCurrentHP() + "/" + player.MaxHp, instant);
+            speedHandler.TextManipulatorWithSpace(player.Stats.Name + " HP: " 
+                + player.GetCurrentHP() + "/" + player.Stats.MaxHp, instant);
+
             for (int i = 0; i < monsters.Count; i++)
             {
                 if (i % 2 == 0) Console.WriteLine();
-                speedHandler.TextManipulatorNoSpace(monsters[i].Name + " HP: " 
-                    + monsters[i].GetCurrentHP() + "/" + monsters[i].MaxHp + "\t" , instant);
+                {
+                    speedHandler.TextManipulatorNoSpace(monsters[i].Stats.Name + " HP: "
+                        + monsters[i].GetCurrentHP() + "/" + monsters[i].Stats.MaxHp + "\t", instant);
+                }
             }
             Console.WriteLine("\n");
         }

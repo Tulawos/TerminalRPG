@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventureTest.src.Characters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace AdventureTest.src.Moves
 {
-    public interface IMove
+    public interface ISingleTarget
     {
-        public void Execute();
+        public MOB ChooseSingleTarget(List<MOB> targets);
     }
 }

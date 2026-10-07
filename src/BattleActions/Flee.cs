@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventureTest.src.Characters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace AdventureTest.src.BattleActions
 {
     public class Flee : Actions
     {
-        public override void Execute(List<Monster> targets, Player player)
+        public override void ExecuteAction(List<MOB> targets, MOB player)
         {
             throw new NotImplementedException();
         }

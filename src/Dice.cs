@@ -5,9 +5,9 @@ namespace AdventureTest.src
     public class Dice
     {
         private static readonly Random _random = new();
-        public static int Roll(DiceType die)
+        public static int Roll(int die)
         {
-            if (die == DiceType.D0)
+            if (die == 0)
             {
                 return 0;
             }

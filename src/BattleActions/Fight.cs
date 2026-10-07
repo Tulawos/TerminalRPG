@@ -1,4 +1,5 @@
-﻿using AdventureTest.src.GameView;
+﻿using AdventureTest.src.Characters;
+using AdventureTest.src.GameView;
 using AdventureTest.src.Moves;
 
 namespace AdventureTest.src.BattleActions
@@ -12,23 +13,21 @@ namespace AdventureTest.src.BattleActions
             this.Attacker = attacker;
         }
 
-        public override void Execute(List<Monster> targets, Player playerTarget)
+        public override void ExecuteAction(List<MOB> targets, MOB playerTarget)
         {
-            Move move = new();
-
-            if(Attacker is Player)
+            Move move;
+            List<MOB> chosenTargets;
+            if (Attacker is Player)
             {
                 Player player = (Player)Attacker;
                 move = ChooseMove(player);
-                targets = ChooseTarget(player, targets, move);
-                Attack(move, targets);
+                chosenTargets = ChooseTarget(player, targets, move);
+                ExecuteMove(chosenTargets, move);
             }
             else
             {
                 Monster monster = (Monster)Attacker;
-                move = ChooseMove(monster);
-                Attack(move, playerTarget);
-                text.PlayerDeadMessage(playerTarget);
+                //implement monster AI logic for choosing move and targets
             }
         }        
 
@@ -36,54 +35,34 @@ namespace AdventureTest.src.BattleActions
         {
             text.AvailableMovePrint(player);
             int response = text.ChooseMoveHandler(player);
-            return player.activeMoves[response - 1];
+            return player.ActiveMoves[response - 1];
         }
 
-        private Move ChooseMove(Monster monster)
+        private List<MOB> ChooseTarget(Player player, List<MOB> targets, Move move)
         {
-            Random rand = new Random();
-            Move chosenMove = monster.activeMoves[rand.Next(0, monster.activeMoves.Count)];
-            return chosenMove;
-        }
+            List<MOB> chosenTargets = new List<MOB>();
+            text.PrintChooseTarget(player, targets);
 
-        private List<Monster> ChooseTarget(Player player, List<Monster> targets, Move move)
-        {
-            text.AvailabeTargetsPrint(player, targets);
-            List<Monster> results = text.ChooseTargetsHandler(player, targets, move);
-            return results;
-        }
-
-        private void Attack(Move move, List<Monster> targets)
-        {            
-            foreach (var target in targets)
+            if (move is ISingleTarget)
             {
-                int attackRoll = Dice.Roll(DiceType.D20) + Attacker.Accuracy;
-                if (attackRoll >= target.Defense)
-                {
-                    int damage = Dice.Roll(Attacker.DamageDie + move.Damage);
-                    target.TakeDamage(damage);
-                    text.AttackHit(Attacker, target.Name, damage);
-                }
-                else 
-                {
-                    text.AttackMissed(Attacker, target);
-                }           
-            }
-        }
-
-        private void Attack(Move move, Player target)
-        {
-            text.MonsterAttacking(Attacker.Name, move.Name);
-            int attackRoll = Dice.Roll(DiceType.D20) + Attacker.Accuracy;
-            if (attackRoll >= target.Defense)
-            {
-                int damage = Dice.Roll(Attacker.DamageDie + move.Damage);
-                target.TakeDamage(damage);
-                text.AttackHit(Attacker, Attacker.Name, damage);
+                MOB chosenTarget = ((ISingleTarget)move).ChooseSingleTarget(targets);
+                chosenTargets.Add(chosenTarget);
             }
             else
             {
-                text.AttackMissed(Attacker, target);
+                //multiple target logic
+            }
+            text.ChosenTargets(player, chosenTargets);
+            return chosenTargets;
+        }
+
+        private void ExecuteMove(List<MOB> targets, Move move)
+        {
+            int damage = 0;
+            foreach (var target in targets)
+            {
+                damage = move.ExecuteMove(Attacker, target);
+                text.AttackHit(Attacker, target.Stats.Name, damage);
             }
         }
     }

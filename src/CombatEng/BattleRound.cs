@@ -1,25 +1,24 @@
 ﻿using AdventureTest.src.BattleActions;
-using AdventureTest.src.GameView;
+using AdventureTest.src.Characters;
 
 namespace AdventureTest.src.CombatEng
 {
-    public class BattleRound : Battle
-    {        
-        Queue<ICombatant> combatants;
+    public class BattleRound
+    {
+        Battle Battle;
+        Queue<IBattler> combatants;
 
-        public BattleRound(Player player, List<Monster> monsters, Queue<ICombatant> combatants) : 
-            base(player, monsters) 
-        { 
+        public BattleRound(Battle battle, Queue<IBattler> combatants)
+        {
+            Battle = battle;
             this.combatants = combatants;
-            view = new FightView();
-        }
-        
+        }        
 
         public void Round()
         {
             while (RoundCondition())
             {
-                view.BattleStatus(player, monsters);
+                Battle.view.BattleStatus(Battle.player, Battle.monsters);
                 var combatant = combatants.Dequeue();
 
                 if (combatant is Player)
@@ -31,25 +30,32 @@ namespace AdventureTest.src.CombatEng
                 }
                 Console.Clear();                
             }
+
+            RemoveDeadMonsters();
         }
 
         private void Turn()
         {
-            Actions action = player.ChooseAction();
-            action.Execute(monsters, player);
+            Actions action = Battle.player.ChooseAction();
+            action.ExecuteAction(Battle.monsters, Battle.player);
         }
 
         private void Turn(Monster monster)
         {
             Fight fight = new Fight(monster);
-            fight.Execute(monsters, player);
+            fight.ExecuteAction(Battle.monsters, Battle.player);
         }
 
         private bool RoundCondition()
         {
             if (combatants.Count == 0) return false;
-            else if (player.GetCurrentHP() == 0) return false;
+            else if (Battle.player.GetCurrentHP() == 0) return false;
             else return true;
+        }
+
+        private void RemoveDeadMonsters()
+        {
+            Battle.monsters.RemoveAll(m => m.GetCurrentHP() <= 0);
         }
     }
 }
