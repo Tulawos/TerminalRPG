@@ -1,21 +1,24 @@
 ﻿
 
 using AdventureTest.src.Characters;
+using AdventureTest.src.GameView;
 
 namespace AdventureTest.src.CombatEng
 {
     public class BattleGenerator
     {
+
         protected Player player;
         protected Dictionary<int, Monster> monsters;
         protected Random rand;
         protected int maxCombatants = 2; //based on map location will update when map gets implemented
 
-        public BattleGenerator(Player player, Dictionary<int, Monster> monsters)
+        public BattleGenerator(Player player, Dictionary<int, Monster> monsters, int maxCombatants)
         {
             this.player = player;
             this.monsters = monsters;
             this.rand = new Random();
+            this.maxCombatants = maxCombatants;
         }
 
         public void GenerateBattle()

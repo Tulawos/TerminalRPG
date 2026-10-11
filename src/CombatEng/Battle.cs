@@ -7,13 +7,12 @@ namespace AdventureTest.src.CombatEng
     {
         public Player player { get; private set; }
         public List<MOB> monsters { get; private set; }
-        public CombatView view { get; private set; }
+        
 
         public Battle(Player player, List<MOB> monsters)
         {
             this.player = player;
             this.monsters = monsters;
-            this.view = new CombatView();
         }
 
         public void BattleStart()
@@ -21,7 +20,7 @@ namespace AdventureTest.src.CombatEng
             while (player.GetCurrentHP() > 0 && monsters.Count > 0)
             {
                 Queue<IBattler> turnOrder = SetTurnOrder();
-                BattleRound battleRound = new BattleRound(this, turnOrder);
+                BattleRound battleRound = new BattleRound(this, turnOrder, new View());
                 battleRound.Round();
             }
         }

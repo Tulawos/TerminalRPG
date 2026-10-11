@@ -34,8 +34,8 @@ namespace AdventureTest.src.BattleActions
         protected Move ChooseMove(Player player)
         {
             Move move;
-            text.AvailableMovePrint(player);
-            text.PrintChooseMove(player);
+            view.WriteLine(text.WriteAvailableMoves(player));
+            view.WriteLine(text.WriteChooseMove(player));
            
             int response = player.InputHandler.GetIntInput();
             while (response < 1 || response > player.ActiveMoves.Count)
@@ -44,7 +44,7 @@ namespace AdventureTest.src.BattleActions
             }
             
             move = player.ActiveMoves[response - 1];
-            text.PrintChosenMove(move); 
+            view.WriteLine(text.WriteChosenMove(move)); 
             return move;
         }
 
@@ -54,10 +54,10 @@ namespace AdventureTest.src.BattleActions
 
             if (move is ISingleTarget)
             {
-                text.PrintChooseTarget(player, targets);
+                view.WriteLine(text.WriteChooseTarget(player, targets));
                 MOB chosenTarget = ((ISingleTarget)move).ChooseSingleTarget(player, targets);
                 chosenTargets.Add(chosenTarget);
-                text.ChosenTargets(player, chosenTargets);
+                view.WriteLine(text.WriteChosenTargets(player, chosenTargets));
             }
             else if (move is IAllTargets)
             {
@@ -76,7 +76,7 @@ namespace AdventureTest.src.BattleActions
             
             foreach (KeyValuePair <MOB, int> mob in damageDealt)
             {
-                text.AttackHit(Attacker, mob.Key.Stats.Name, mob.Value);
+                view.WriteLine(text.WriteAttackHit(Attacker, mob.Key.Stats.Name, mob.Value));
             }
         }
     }

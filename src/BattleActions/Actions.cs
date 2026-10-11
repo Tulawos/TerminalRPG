@@ -5,7 +5,8 @@ namespace AdventureTest.src.BattleActions
 {
     public abstract class Actions
     {
-        public FightView text = new FightView();
+        public CombatText text = new CombatText();
+        public IConsole view = new View();
         public abstract void DoAction(List<MOB> targets, MOB player);
     }
 }

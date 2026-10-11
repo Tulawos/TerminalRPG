@@ -1,5 +1,6 @@
 ﻿using AdventureTest.src.BattleActions;
 using AdventureTest.src.Characters;
+using AdventureTest.src.GameView;
 
 namespace AdventureTest.src.CombatEng
 {
@@ -7,18 +8,22 @@ namespace AdventureTest.src.CombatEng
     {
         Battle Battle;
         Queue<IBattler> combatants;
+        public IConsole view { get; private set; }
+        public CombatText text { get; private set; }
 
-        public BattleRound(Battle battle, Queue<IBattler> combatants)
+        public BattleRound(Battle battle, Queue<IBattler> combatants, IConsole view)
         {
-            Battle = battle;
+            this.Battle = battle;
             this.combatants = combatants;
+            this.view = view;
+            this.text = new CombatText();
         }        
 
         public void Round()
         {
             while (RoundCondition())
             {
-                Battle.view.BattleStatus(Battle.player, Battle.monsters);
+                view.WriteLine(text.WriteBattleStatus(Battle.player, Battle.monsters));
                 var combatant = combatants.Dequeue();
 
                 if (combatant is Player)
@@ -27,9 +32,9 @@ namespace AdventureTest.src.CombatEng
                 {
                     Monster monster = (Monster)combatant;
                     Turn(monster);
-                }
-                Console.Clear();                
+                }  
             }
+            view.Clear();
             RemoveDeadMonsters();
         }
 
@@ -47,9 +52,10 @@ namespace AdventureTest.src.CombatEng
 
         private bool RoundCondition()
         {
-            if (combatants.Count == 0) return false;
-            else if (Battle.player.GetCurrentHP() == 0) return false;
-            else return true;
+            if (combatants.Count == 0 || Battle.player.GetCurrentHP() == 0) 
+                return false;
+            else
+                return true;
         }
 
         private void RemoveDeadMonsters()

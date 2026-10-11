@@ -13,7 +13,7 @@ namespace AdventureTest.src
 
             GameDatabase gameDatabase = new(list);       
             
-            BattleGenerator combat = new BattleGenerator(gameDatabase.player, gameDatabase.monsters);
+            BattleGenerator combat = new BattleGenerator(gameDatabase.player, gameDatabase.monsters, 2);
             combat.GenerateBattle();
             SaveGame.Save(gameDatabase.player);
         }
