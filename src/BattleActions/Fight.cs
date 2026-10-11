@@ -40,19 +40,24 @@ namespace AdventureTest.src.BattleActions
         private List<MOB> ChooseTarget(Player player, List<MOB> targets, Move move)
         {
             List<MOB> chosenTargets = new List<MOB>();
-            text.PrintChooseTarget(player, targets);
 
             if (move is ISingleTarget)
             {
+                text.PrintChooseTarget(player, targets);
                 MOB chosenTarget = ((ISingleTarget)move).ChooseSingleTarget(player, targets);
                 chosenTargets.Add(chosenTarget);
+                text.ChosenTargets(player, chosenTargets);
+            }
+            else if (move is IAllTargets)
+            {
+                chosenTargets = ((IAllTargets)move).ChooseAllTargets(player, targets);
             }
             else
             {
                 //multiple target logic
             }
 
-            text.ChosenTargets(player, chosenTargets);
+            
             return chosenTargets;
         }
 

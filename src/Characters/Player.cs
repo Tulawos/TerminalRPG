@@ -24,6 +24,7 @@ namespace AdventureTest.src.Characters
             // Implement logic to set the player's moves based on their level or other criteria
             // For now, we can add some default moves or implement a simple selection mechanism
             ActiveMoves.Add(new Slash());
+            ActiveMoves.Add(new Cleave());
         }
     }
 }

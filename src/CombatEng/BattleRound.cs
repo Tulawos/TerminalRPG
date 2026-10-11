@@ -30,7 +30,6 @@ namespace AdventureTest.src.CombatEng
                 }
                 Console.Clear();                
             }
-
             RemoveDeadMonsters();
         }
 

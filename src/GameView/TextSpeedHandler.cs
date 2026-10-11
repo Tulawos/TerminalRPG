@@ -17,32 +17,32 @@ namespace AdventureTest.src.GameView
         { 
             speedToken.SpeedTextNoLine(input, delay);
         }
-    }
 
-    public class TextSpeedToken : IDisposable
-    {
-        public void SpeedTextWithLine(string message, int delay)
+        private class TextSpeedToken : IDisposable
         {
-            foreach (char c in message)
+            public void SpeedTextWithLine(string message, int delay)
             {
-                Console.Write(c);
-                Thread.Sleep(delay);
+                foreach (char c in message)
+                {
+                    Console.Write(c);
+                    Thread.Sleep(delay);
+                }
+                Console.WriteLine();
             }
-            Console.WriteLine();
-        }
 
-        public void SpeedTextNoLine(string message, int delay)
-        {
-            foreach (char c in message)
+            public void SpeedTextNoLine(string message, int delay)
             {
-                Console.Write(c);
-                Thread.Sleep(delay);
+                foreach (char c in message)
+                {
+                    Console.Write(c);
+                    Thread.Sleep(delay);
+                }
             }
-        }
 
-        public void Dispose()
-        {
-            Console.WriteLine();
+            public void Dispose()
+            {
+                Console.WriteLine();
+            }
         }
     }
 }

@@ -13,6 +13,18 @@ namespace AdventureTest.src.Moves
             MinDamage = 5;
             MaxDamage = 10;
         }
+
+        public MOB ChooseSingleTarget(MOB source, List<MOB> targets)
+        {
+            int choice = 0;
+            if (source is Player)
+            {
+                Player player = (Player)source;
+                choice = player.InputHandler.GetIntInput() - 1;
+            }
+            return targets[choice];
+        }
+
         public override Dictionary<MOB, int> ExecuteMove(MOB source, List<MOB> targets)
         {
             Dictionary<MOB, int> damageDealt = new Dictionary<MOB, int>();
@@ -22,18 +34,6 @@ namespace AdventureTest.src.Moves
             target.TakeDamage(damage);
             damageDealt[target] = damage;
             return damageDealt;
-        }
-
-        public MOB ChooseSingleTarget(MOB source, List<MOB> targets)
-        {
-            int choice = 0;
-            if (source is Player)
-            {
-                Player player = (Player)source;
-                choice = player.InputHandler.GetIntInput() - 1;
-                
-            }
-            return targets[choice];
         }
     }
 }
