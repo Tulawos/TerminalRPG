@@ -9,12 +9,13 @@ namespace AdventureTest.src.CombatEng
         readonly Player player;
         readonly Dictionary<int, Monster> monsters;
         readonly Random rand;
+        readonly int maxCombatants = 2; //based on map location will update when map gets implemented
 
         public BattleGenerator(Player player, Dictionary<int, Monster> monsters)
         {
             this.player = player;
             this.monsters = monsters;
-            this.rand = new();
+            this.rand = new Random();
         }
         public void GenerateBattle()
         {
@@ -25,7 +26,7 @@ namespace AdventureTest.src.CombatEng
         private List<MOB> GenerateCombatants()
         {
             List<MOB> combatants = [];
-            int numCombatants = rand.Next(1, 4); 
+            int numCombatants = rand.Next(0, maxCombatants); 
 
             while (combatants.Count <= numCombatants)
             {

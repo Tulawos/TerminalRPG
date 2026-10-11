@@ -9,7 +9,7 @@ namespace AdventureTest.src.BattleActions
 {
     public class Flee : Actions
     {
-        public override void ExecuteAction(List<MOB> targets, MOB player)
+        public override void DoAction(List<MOB> targets, MOB player)
         {
             throw new NotImplementedException();
         }

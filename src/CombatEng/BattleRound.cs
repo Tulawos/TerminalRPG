@@ -37,13 +37,13 @@ namespace AdventureTest.src.CombatEng
         private void Turn()
         {
             Actions action = Battle.player.ChooseAction();
-            action.ExecuteAction(Battle.monsters, Battle.player);
+            action.DoAction(Battle.monsters, Battle.player);
         }
 
         private void Turn(Monster monster)
         {
             Fight fight = new Fight(monster);
-            fight.ExecuteAction(Battle.monsters, Battle.player);
+            fight.DoAction(Battle.monsters, Battle.player);
         }
 
         private bool RoundCondition()

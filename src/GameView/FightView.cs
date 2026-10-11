@@ -41,7 +41,10 @@ namespace AdventureTest.src.GameView
         {
             Console.WriteLine();
             speedHandler.TextManipulatorWithSpace("You have chosen to attack: ", mediumSpeed);
-            foreach (Monster mon in targets) speedHandler.TextManipulatorWithSpace(mon.Stats.Name, fastSpeed);
+            foreach (Monster mon in targets)
+            {
+                speedHandler.TextManipulatorWithSpace(mon.Stats.Name, fastSpeed);
+            }
             Console.WriteLine();
         }
 

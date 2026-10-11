@@ -1,5 +1,4 @@
 ﻿using AdventureTest.src.BattleActions;
-using AdventureTest.src.GameView;
 using AdventureTest.src.Moves;
 
 namespace AdventureTest.src.Characters
@@ -16,6 +15,7 @@ namespace AdventureTest.src.Characters
             ActiveMoves = new List<Move>();
             Stats = new CharacterStats();
         }
+
         public MOB(CharacterStats stats)
         {
             Stats = stats;

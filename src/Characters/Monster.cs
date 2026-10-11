@@ -13,8 +13,12 @@ namespace AdventureTest.src.Characters
 
         public Monster GetMonstersByID(int id) => this;
 
-        public Monster Copy() => new Monster(this.Stats, Id);
-        
+        public Monster Copy()
+        {
+            CharacterStats newStats = new CharacterStats(this.Stats.Name, this.Stats.Level, 
+                this.Stats.MaxHp, this.Stats.Damage, this.Stats.Defense, this.Stats.Accuracy, this.Stats.Xp);
+            return new Monster(newStats, Id);
+        }        
 
         public void SetMoves()
         {

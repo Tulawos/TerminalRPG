@@ -9,6 +9,6 @@ namespace AdventureTest.src.Moves
 {
     public interface ISingleTarget
     {
-        public MOB ChooseSingleTarget(List<MOB> targets);
+        public MOB ChooseSingleTarget(MOB source, List<MOB> targets);
     }
 }

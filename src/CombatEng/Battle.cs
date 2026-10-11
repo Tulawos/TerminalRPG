@@ -28,7 +28,7 @@ namespace AdventureTest.src.CombatEng
 
         private Queue<IBattler> SetTurnOrder()
         {
-            Queue<IBattler> turnOrder = new();
+            Queue<IBattler> turnOrder = new Queue<IBattler>();
             var characters = SetInitiatives();            
             foreach(var character in characters) 
                 turnOrder.Enqueue(character);
@@ -38,7 +38,7 @@ namespace AdventureTest.src.CombatEng
 
         private List<IBattler> SetInitiatives()
         {
-            List<IBattler> characterLists = [];
+            List<IBattler> characterLists = new List<IBattler>();
 
             player.RollInitiative();
             characterLists.Add(player);
