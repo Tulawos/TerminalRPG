@@ -1,7 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿
 using Google.GenAI;
-using Google.GenAI.Types;
 
 namespace AdventureTest.src
 {

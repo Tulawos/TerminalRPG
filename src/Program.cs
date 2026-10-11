@@ -6,7 +6,7 @@ namespace AdventureTest.src
     public class Program 
     {
         static void Main(string[] args)
-        {            
+        {
             List<string> list = new List<string>();
             list.Add(args[0]); //player
             list.Add(args[1]); //monsters

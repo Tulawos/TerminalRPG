@@ -33,10 +33,10 @@ namespace AdventureTest.src.BattleActions
 
         protected Move ChooseMove(Player player)
         {
+            Move move;
             text.AvailableMovePrint(player);
             text.PrintChooseMove(player);
-            
-            Move move;
+           
             int response = player.InputHandler.GetIntInput();
             while (response < 1 || response > player.ActiveMoves.Count)
             {
