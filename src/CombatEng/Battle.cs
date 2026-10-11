@@ -26,7 +26,7 @@ namespace AdventureTest.src.CombatEng
             }
         }
 
-        private Queue<IBattler> SetTurnOrder()
+        protected Queue<IBattler> SetTurnOrder()
         {
             Queue<IBattler> turnOrder = new Queue<IBattler>();
             var characters = SetInitiatives();            

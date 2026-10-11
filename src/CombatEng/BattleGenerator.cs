@@ -6,10 +6,10 @@ namespace AdventureTest.src.CombatEng
 {
     public class BattleGenerator
     {
-        readonly Player player;
-        readonly Dictionary<int, Monster> monsters;
-        readonly Random rand;
-        readonly int maxCombatants = 2; //based on map location will update when map gets implemented
+        protected Player player;
+        protected Dictionary<int, Monster> monsters;
+        protected Random rand;
+        protected int maxCombatants = 2; //based on map location will update when map gets implemented
 
         public BattleGenerator(Player player, Dictionary<int, Monster> monsters)
         {
@@ -17,13 +17,14 @@ namespace AdventureTest.src.CombatEng
             this.monsters = monsters;
             this.rand = new Random();
         }
+
         public void GenerateBattle()
         {
             List<MOB> combatants = GenerateCombatants();
             Battle battle = new Battle(player, combatants);
             battle.BattleStart();
         }
-        private List<MOB> GenerateCombatants()
+        protected List<MOB> GenerateCombatants()
         {
             List<MOB> combatants = [];
             int numCombatants = rand.Next(0, maxCombatants); 
