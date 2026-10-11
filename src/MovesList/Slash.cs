@@ -1,7 +1,7 @@
-﻿
-using AdventureTest.src.Characters;
+﻿using AdventureTest.src.Characters;
+using AdventureTest.src.Moves;
 
-namespace AdventureTest.src.Moves
+namespace AdventureTest.src.MovesList
 {
     public class Slash : Move, ISingleTarget
     {

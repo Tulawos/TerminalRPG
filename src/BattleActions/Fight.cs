@@ -1,5 +1,6 @@
 ﻿using AdventureTest.src.Characters;
 using AdventureTest.src.Moves;
+using static Google.Apis.Requests.BatchRequest;
 
 namespace AdventureTest.src.BattleActions
 {
@@ -12,7 +13,7 @@ namespace AdventureTest.src.BattleActions
             this.Attacker = attacker;
         }
 
-        public override void DoAction(List<MOB> targets, MOB playerTarget)
+        public override void DoAction(List<MOB> targets, MOB target)
         {
             Move move;
             List<MOB> chosenTargets;
@@ -30,11 +31,21 @@ namespace AdventureTest.src.BattleActions
             }
         }        
 
-        private Move ChooseMove(Player player)
+        protected Move ChooseMove(Player player)
         {
             text.AvailableMovePrint(player);
-            int response = text.ChooseMoveHandler(player);
-            return player.ActiveMoves[response - 1];
+            text.PrintChooseMove(player);
+            
+            Move move;
+            int response = player.InputHandler.GetIntInput();
+            while (response < 1 || response > player.ActiveMoves.Count)
+            {
+                response = player.InputHandler.GetIntInput();
+            }
+            
+            move = player.ActiveMoves[response - 1];
+            text.PrintChosenMove(move); 
+            return move;
         }
 
         private List<MOB> ChooseTarget(Player player, List<MOB> targets, Move move)
@@ -52,12 +63,10 @@ namespace AdventureTest.src.BattleActions
             {
                 chosenTargets = ((IAllTargets)move).ChooseAllTargets(player, targets);
             }
-            else
+            else if (move is IMultiTarget)
             {
                 //multiple target logic
             }
-
-            
             return chosenTargets;
         }
 

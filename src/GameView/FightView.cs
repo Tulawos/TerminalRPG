@@ -2,6 +2,7 @@
 using AdventureTest.src.Moves;
 using System.Reflection;
 using System.Xml.Linq;
+using static Google.Apis.Requests.BatchRequest;
 
 namespace AdventureTest.src.GameView
 {
@@ -14,15 +15,17 @@ namespace AdventureTest.src.GameView
                 speedHandler.TextManipulatorWithSpace(i + 1 + ". " + player.ActiveMoves[i].Name, fastSpeed);
         }
 
-        public int ChooseMoveHandler(Player player)
+        public void PrintChooseMove(Player player)
         {
             speedHandler.TextManipulatorWithSpace("\nChoose a move: ", mediumSpeed);
-            int response = InputVerifier(player, player.ActiveMoves.Count);
-
             Console.WriteLine();
-            speedHandler.TextManipulatorWithSpace("You have chosen " + player.ActiveMoves[response - 1].Name + ".\n", mediumSpeed);
+            
+        }
+
+        public void PrintChosenMove(Move move)
+        {
+            speedHandler.TextManipulatorWithSpace("You have chosen " + move.Name + ".\n", mediumSpeed);
             Console.ReadKey();
-            return response;
         }
 
         public void PrintChooseTarget(Player player, List<MOB> targets)
@@ -76,18 +79,9 @@ namespace AdventureTest.src.GameView
             if (player.GetCurrentHP() == 0) speedHandler.TextManipulatorWithSpace("You have died...", mediumSpeed);
         }
 
-        private int InputVerifier(Player player, int limit)
+        public void InvalidInput()
         {
-            int response = player.InputHandler.GetIntInput();
-
-            while (!player.InputHandler.InputWithinRange(response, limit))
-            {
-                speedHandler.TextManipulatorWithSpace("Incorrect input. Please choose an input within range", mediumSpeed);
-                response = player.InputHandler.GetIntInput();
-            }
-            return response;
+            speedHandler.TextManipulatorWithSpace("Incorrect input. Please choose an input within range", mediumSpeed);
         }
-
-        
     }
 }

@@ -1,6 +1,5 @@
 ﻿using AdventureTest.src.BattleActions;
-using AdventureTest.src.Moves;
-using AdventureTest.src.GameView;
+using AdventureTest.src.MovesList;
 
 namespace AdventureTest.src.Characters
 {    
@@ -25,6 +24,7 @@ namespace AdventureTest.src.Characters
             // For now, we can add some default moves or implement a simple selection mechanism
             ActiveMoves.Add(new Slash());
             ActiveMoves.Add(new Cleave());
+            ActiveMoves.Add(new FlurryOfBLows());
         }
     }
 }

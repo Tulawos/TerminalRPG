@@ -1,10 +1,9 @@
-﻿
-using AdventureTest.src.Characters;
+﻿using AdventureTest.src.Characters;
 
 namespace AdventureTest.src.Moves
 {
-    public interface IAllTargets
+    internal interface IMultiTarget
     {
-        public List<MOB> ChooseAllTargets(MOB source, List<MOB> targets);
+        public List<MOB> ChooseMultipleTargets(MOB source, List<MOB> targets);
     }
 }
